@@ -7,6 +7,7 @@ if exists("b:did_indent")
 endif
 let b:did_indent = 1
 
+setlocal autoindent
 setlocal indentexpr=GetGitconfigIndent()
 setlocal indentkeys=o,O,*<Return>,0[,],0;,0#,=,!^F
 
