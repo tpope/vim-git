@@ -16,13 +16,17 @@ if exists("*GetGitconfigIndent")
   finish
 endif
 
-function! GetGitconfigIndent(...)
+function! GetGitconfigIndent()
+    let line  = getline(v:lnum-1)
     let cline = getline(v:lnum)
-    if cline =~ '^\s*\['
+    if line =~ '[^\\]\@<=\%(\\\\\)*\\$'
+	" odd number of slashes, in a line continuation
+	return -1
+    elseif cline =~ '^\s*\['
         return 0
-    elseif cline =~ '^\s*\a' && getline(v:lnum-1) !~ '\\$'
+    elseif cline =~ '^\s*\a'
         return &sw
-    elseif cline == ''       && getline(v:lnum-1) =~ '^\['
+    elseif cline == ''       && line =~ '^\['
         return &sw
     else
         return -1
