@@ -1,7 +1,7 @@
 " Vim syntax file
 " Language:	git commit file
 " Maintainer:	Tim Pope <vimNOSPAM@tpope.info>
-" Filenames:	*/.git/COMMIT_EDITMSG
+" Filenames:	*.git/COMMIT_EDITMSG
 
 if exists("b:current_syntax")
     finish
@@ -9,8 +9,10 @@ endif
 
 syn case match
 
-syn match   gitcommitFirstLine	"\%^[^#].\{0,49\}" nextgroup=gitcommitOverflow
+syn match   gitcommitFirstLine	"\%^[^#].*"  nextgroup=gitcommitBlank skipnl
+syn match   gitcommitSummary  	"^.\{0,50\}" contained containedin=gitcommitFirstLine nextgroup=gitcommitOverflow
 syn match   gitcommitOverflow	".*" contained
+syn match   gitcommitBlank	"^[^#].*" contained
 syn match   gitcommitComment	"^#.*"
 syn region  gitcommitHead	start=/^#   / end=/^#$/ contained transparent
 syn match   gitcommitOnBranch	"\%(^# \)\@<=On branch" contained containedin=gitcommitComment nextgroup=gitcommitBranch skipwhite
@@ -27,7 +29,7 @@ syn match   gitcommitType	"\t\@<=[a-z][a-z ]*[a-z]: "he=e-2	contained containedi
 syn match   gitcommitFile	".\{-\}\%($\| -> \)\@=" contained nextgroup=gitcommitArrow
 syn match   gitcommitArrow	" -> " contained nextgroup=gitcommitFile transparent
 
-hi def link gitcommitFirstLine		Keyword
+hi def link gitcommitSummary		Keyword
 hi def link gitcommitComment		Comment
 hi def link gitcommitUntracked		gitcommitComment
 hi def link gitcommitDiscarded		gitcommitComment
@@ -38,7 +40,8 @@ hi def link gitcommitType		Type
 hi def link gitcommitHeader		PreProc
 hi def link gitcommitFile		Constant
 hi def link gitcommitUntrackedFile	gitcommitFile
-hi def link gitcommitOverflow		Error
+"hi def link gitcommitOverflow		Error
+hi def link gitcommitBlank		Error
 
 let b:current_syntax = "gitcommit"
 
