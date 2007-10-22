@@ -1,7 +1,6 @@
 " Vim filetype plugin
 " Language:		git config file
 " Maintainer:		Tim Pope <vimNOSPAM@tpope.info>
-" ----------------------------------------------------------------------------
 
 " Only do this when not done yet for this buffer
 if (exists("b:did_ftplugin"))
