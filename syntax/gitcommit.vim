@@ -9,10 +9,14 @@ endif
 
 syn case match
 
+if has("spell")
+    syn spell toplevel
+endif
+
 syn match   gitcommitFirstLine	"\%^[^#].*"  nextgroup=gitcommitBlank skipnl
-syn match   gitcommitSummary  	"^.\{0,50\}" contained containedin=gitcommitFirstLine nextgroup=gitcommitOverflow
-syn match   gitcommitOverflow	".*" contained
-syn match   gitcommitBlank	"^[^#].*" contained
+syn match   gitcommitSummary  	"^.\{0,50\}" contained containedin=gitcommitFirstLine nextgroup=gitcommitOverflow contains=@Spell
+syn match   gitcommitOverflow	".*" contained contains=@Spell
+syn match   gitcommitBlank	"^[^#].*" contained contains=@Spell
 syn match   gitcommitComment	"^#.*"
 syn region  gitcommitHead	start=/^#   / end=/^#$/ contained transparent
 syn match   gitcommitOnBranch	"\%(^# \)\@<=On branch" contained containedin=gitcommitComment nextgroup=gitcommitBranch skipwhite
