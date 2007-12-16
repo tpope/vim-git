@@ -19,6 +19,10 @@ if &textwidth == 0
   let b:undo_ftplugin = b:undo_ftplugin . " tw<"
 endif
 
+if exists("g:no_gitcommit_commands")
+  finish
+endif
+
 " Automatically diffing can be done with:
 "   autocmd FileType gitcommit DiffGitCached | wincmd p
 command! -bang -bar -buffer -complete=custom,s:diffcomplete -nargs=* DiffGitCached :call s:gitdiffcached(<bang>0,b:git_dir,<f-args>)
