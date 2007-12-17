@@ -15,6 +15,6 @@ syn match   gitsendemailComment "^GIT:.*"
 
 hi def link gitsendemailComment Comment
 
-let b:current_syntax = "gitmail"
+let b:current_syntax = "gitsendemail"
 
 " vim:set ft=vim ff=unix ts=8 sts=4 sw=4:
