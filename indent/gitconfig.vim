@@ -33,5 +33,3 @@ function! GetGitconfigIndent()
         return -1
     endif
 endfunction
-
-" vim:set sw=4 sts=4 ts=8 noet ff=unix:

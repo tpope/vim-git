@@ -35,5 +35,3 @@ hi def link gitconfigEscape		Delimiter
 hi def link gitconfigError		Error
 
 let b:current_syntax = "gitconfig"
-
-" vim:set ft=vim ff=unix ts=8 sts=4 sw=4:

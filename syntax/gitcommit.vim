@@ -49,5 +49,3 @@ hi def link gitcommitUntrackedFile	gitcommitFile
 hi def link gitcommitBlank		Error
 
 let b:current_syntax = "gitcommit"
-
-" vim:set ft=vim ff=unix ts=8 sts=4 sw=4:
