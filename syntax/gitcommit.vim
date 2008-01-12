@@ -24,11 +24,11 @@ syn match   gitcommitOnBranch	"\%(^# \)\@<=On branch" contained containedin=gitc
 syn match   gitcommitBranch	"\S\+" contained
 syn match   gitcommitHeader	"\%(^# \)\@<=.*:$"	contained containedin=gitcommitComment
 
-syn region  gitcommitUntracked	start=/^# Untracked files:/ end=/^#$/ contains=gitcommitHeader,gitcommitHead,gitcommitUntrackedFile fold
+syn region  gitcommitUntracked	start=/^# Untracked files:/ end=/^#$\|^#\@!/ contains=gitcommitHeader,gitcommitHead,gitcommitUntrackedFile fold
 syn match   gitcommitUntrackedFile  "\t\@<=.*"	contained
 
-syn region  gitcommitDiscarded	start=/^# Changed but not updated:/ end=/^#$/ contains=gitcommitHeader,gitcommitHead,gitcommitType fold
-syn region  gitcommitSelected	start=/^# Changes to be committed:/ end=/^#$/ contains=gitcommitHeader,gitcommitHead,gitcommitType fold
+syn region  gitcommitDiscarded	start=/^# Changed but not updated:/ end=/^#$\|^#\@!/ contains=gitcommitHeader,gitcommitHead,gitcommitType fold
+syn region  gitcommitSelected	start=/^# Changes to be committed:/ end=/^#$\|^#\@!/ contains=gitcommitHeader,gitcommitHead,gitcommitType fold
 
 syn match   gitcommitType	"\t\@<=[a-z][a-z ]*[a-z]: "he=e-2	contained containedin=gitcommitComment nextgroup=gitcommitFile skipwhite
 syn match   gitcommitFile	".\{-\}\%($\| -> \)\@=" contained nextgroup=gitcommitArrow
