@@ -30,8 +30,6 @@ command! -bang -bar -buffer -complete=custom,s:diffcomplete -nargs=* DiffGitCach
 
 function! s:diffcomplete(A,L,P)
     let args = ""
-    let g:L = a:L
-    let g:P = a:P
     if a:P <= match(a:L." -- "," -- ")+3
         let args = args . "-p\n--stat\n--shortstat\n--summary\n--patch-with-stat\n--no-renames\n-B\n-M\n-C\n"
     end
