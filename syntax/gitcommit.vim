@@ -9,6 +9,7 @@ if exists("b:current_syntax")
 endif
 
 syn case match
+syn sync minlines=50
 
 if has("spell")
     syn spell toplevel
