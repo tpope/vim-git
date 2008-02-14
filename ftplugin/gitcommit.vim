@@ -71,8 +71,8 @@ function! s:gitdiffcached(bang,gitdir,...)
     let b:git_dir = a:gitdir
     command! -bang -bar -buffer -complete=custom,s:diffcomplete -nargs=* DiffGitCached :call s:gitdiffcached(<bang>0,b:git_dir,<f-args>)
     nnoremap <silent> q :q<CR>
-    set buftype=nowrite nobuflisted noswapfile nomodifiable
-    set filetype=diff includeexpr=substitute(v:fname,'^[ab]/','','')
+    setlocal buftype=nowrite nobuflisted noswapfile nomodifiable
+    setlocal filetype=diff includeexpr=substitute(v:fname,'^[ab]/','','')
     if strpart(&l:path,0,strlen(tree)) != tree
         let &l:path = tree.','.&l:path
     endif
