@@ -1,7 +1,8 @@
 " Vim syntax file
-" Language:     git rebase --interactive
-" Maintainer:   Tim Pope <vimNOSPAM@tpope.info>
-" Filenames:    git-rebase-todo
+" Language:	git rebase --interactive
+" Maintainer:	Tim Pope <vimNOSPAM@tpope.info>
+" Filenames:	git-rebase-todo
+" Last Change:	2008 Feb 21
 
 if exists("b:current_syntax")
     finish

@@ -1,7 +1,7 @@
 " Vim filetype plugin
 " Language:	git rebase --interactive
 " Maintainer:	Tim Pope <vimNOSPAM@tpope.info>
-" Last Change:	2008 Feb 14
+" Last Change:	2008 Feb 21
 
 " Only do this when not done yet for this buffer
 if (exists("b:did_ftplugin"))
