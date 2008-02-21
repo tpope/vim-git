@@ -1,5 +1,5 @@
 " Vim filetype plugin
-" Language:	git config file
+" Language:	git rebase --interactive
 " Maintainer:	Tim Pope <vimNOSPAM@tpope.info>
 " Last Change:	2008 Feb 14
 
@@ -9,5 +9,6 @@ if (exists("b:did_ftplugin"))
 endif
 let b:did_ftplugin = 1
 
-set keywordprg=git\ show
-let b:undo_ftplugin = "setl keywordprg<"
+setlocal comments=:# commentstring=#\ %s formatoptions-=t
+setlocal keywordprg=git\ show
+let b:undo_ftplugin = "setl com< cms< fo< keywordprg<"
