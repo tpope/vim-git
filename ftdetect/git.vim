@@ -7,4 +7,13 @@ augroup FTgit
                 \ if getline(1) =~ '^From.*# This line is ignored.$' |
                 \ set ft=gitsendemail |
                 \ endif
+    autocmd BufNewFile,BufRead *.git/**
+                \ if getline(1) =~ '^\x\{40\}\>\|^ref: ' |
+                \ set ft=gitlog |
+                \ endif
+    autocmd BufNewFile,BufRead *
+                \ if getline(1) =~ '^\(commit\|tree\|object\) \x\{40\}$' ||
+                \    getline(1)."\n".getline(2) =~ '^tag .*\nTagger: ' |
+                \ set ft=gitlog |
+                \ endif
 augroup END
