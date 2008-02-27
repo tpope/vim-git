@@ -1,5 +1,5 @@
 " Vim filetype plugin
-" Language:	git log
+" Language:	generic git output
 " Maintainer:	Tim Pope <vimNOSPAM@tpope.info>
 " Last Change:	2008 Feb 27
 

@@ -8,7 +8,7 @@ if (exists("b:did_ftplugin"))
   finish
 endif
 
-runtime! ftplugin/gitlog.vim
+runtime! ftplugin/git.vim
 let b:did_ftplugin = 1
 
 if &textwidth == 0
@@ -64,5 +64,5 @@ function! s:gitdiffcached(bang,gitdir,...)
     let b:git_dir = a:gitdir
     command! -bang -bar -buffer -complete=custom,s:diffcomplete -nargs=* DiffGitCached :call s:gitdiffcached(<bang>0,b:git_dir,<f-args>)
     nnoremap <silent> q :q<CR>
-    setlocal buftype=nowrite nobuflisted noswapfile nomodifiable filetype=gitlog
+    setlocal buftype=nowrite nobuflisted noswapfile nomodifiable filetype=git
 endfunction

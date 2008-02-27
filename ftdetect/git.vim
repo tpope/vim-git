@@ -9,11 +9,11 @@ augroup FTgit
                 \ endif
     autocmd BufNewFile,BufRead *.git/**
                 \ if getline(1) =~ '^\x\{40\}\>\|^ref: ' |
-                \ set ft=gitlog |
+                \ set ft=git |
                 \ endif
     autocmd BufNewFile,BufRead *
                 \ if getline(1) =~ '^\(commit\|tree\|object\) \x\{40\}$' ||
                 \    getline(1)."\n".getline(2) =~ '^tag .*\nTagger: ' |
-                \ set ft=gitlog |
+                \ set ft=git |
                 \ endif
 augroup END
