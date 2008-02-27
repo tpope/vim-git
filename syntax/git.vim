@@ -23,8 +23,7 @@ syn region gitDiff start=/\%(^diff --git \)\@=/ end=/^$/ contains=@gitDiff fold
 
 syn match  gitKeyword /^\%(object\|type\|tag\|commit\|tree\|parent\)\>/ contained containedin=gitHead nextgroup=gitHash,gitType skipwhite
 syn match  gitKeyword /^\%(tag\>\|ref:\)/ contained containedin=gitHead nextgroup=gitReference skipwhite
-syn match  gitKeyword /\<\%(blob\|tree\)\>/ contained nextgroup=gitHash skipwhite
-syn match  gitMode    /^\d\{6\}/ contained containedin=gitHead nextgroup=gitKeyword skipwhite
+syn match  gitMode    /^\d\{6\}/ contained containedin=gitHead nextgroup=gitType skipwhite
 syn match  gitIdentityKeyword /^\%(author\|committer\|tagger\)\>/ contained containedin=gitHead nextgroup=gitIdentity skipwhite
 syn match  gitIdentityHeader /^\%(Author\|Commit\|Tagger\):/ contained containedin=gitHead nextgroup=gitIdentity skipwhite
 syn match  gitDateHeader /^\%(AuthorDate\|CommitDate\|Date\):/ contained containedin=gitHead nextgroup=gitDate skipwhite
@@ -38,7 +37,7 @@ syn match  gitReflogMiddle /\S\+@{\d\+} (/he=e-2 nextgroup=gitIdentity
 syn match  gitDate      /\<\u\l\l \u\l\l \d\d \d\d:\d\d:\d\d \d\d\d\d [+-]\d\d\d\d/ contained
 syn match  gitDate      /-\=\d\+ [+-]\d\d\d\d\>/               contained
 syn match  gitDate      /\<\d\+ \l\+ ago\>/                    contained
-syn match  gitType      /\<\%(tag\|commit\|tree\|blob\)\>/     contained
+syn match  gitType      /\<\%(tag\|commit\|tree\|blob\)\>/     contained nextgroup=gitHash skipwhite
 syn match  gitReference /\S\+\S\@!/                            contained
 syn match  gitHash      /\<\x\{40\}\>/                         contained nextgroup=gitIdentity skipwhite
 syn match  gitHash      /^\<\x\{40\}\>/ containedin=gitHead contained nextgroup=gitHash skipwhite
