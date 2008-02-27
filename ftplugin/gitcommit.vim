@@ -1,27 +1,31 @@
 " Vim filetype plugin
 " Language:	git config file
 " Maintainer:	Tim Pope <vimNOSPAM@tpope.info>
-" Last Change:	2008 Feb 21
+" Last Change:	2008 Feb 27
 
 " Only do this when not done yet for this buffer
 if (exists("b:did_ftplugin"))
   finish
 endif
-let b:did_ftplugin = 1
 
-" allow gf to work even if in a subdirectory
-let b:git_dir = expand("%:p:h")
-let &l:path = fnamemodify(b:git_dir,':h').",".&l:path
-let b:undo_ftplugin = "setl path<"
+runtime! ftplugin/gitlog.vim
+let b:did_ftplugin = 1
 
 if &textwidth == 0
   " make sure that log messages play nice with git-log on standard terminals
   setlocal textwidth=72
-  let b:undo_ftplugin = b:undo_ftplugin . " tw<"
+  if !exists("b:undo_ftplugin")
+      let b:undo_ftplugin = ""
+  endif
+  let b:undo_ftplugin = b:undo_ftplugin . "|setl tw<"
 endif
 
-if exists("g:no_gitcommit_commands")
+if exists("g:no_gitcommit_commands") || v:version < 700
   finish
+endif
+
+if !exists("b:git_dir")
+    let b:git_dir = expand("%:p:h")
 endif
 
 " Automatically diffing can be done with:
@@ -45,33 +49,20 @@ endfunction
 function! s:gitdiffcached(bang,gitdir,...)
     let tree = fnamemodify(a:gitdir,':h')
     let name = tempname()
-    let prefix = ""
+    let git = "git"
     if strpart(getcwd(),0,strlen(tree)) != tree
-        if has("win32")
-            let oldgit = $GIT_DIR
-            let $GIT_DIR = a:gitdir
-        else
-            " Can't unset an env var, so use shell syntax instead
-            let prefix = 'GIT_DIR='.shellescape(a:gitdir).' '
-        endif
+        let git .= " --git-dir=".has("*shellescape") ? shellescape(a:gitdir) : '\"'.a:gitdir.'\"'
     endif
     if a:0
         let extra = join(map(copy(a:000),has("*shellescape") ? 'shellescape(v:val)' : "'\"'.v:val.'\"'"))
     else
         let extra = "-p --stat=".&columns
     endif
-    call system(prefix."git diff --cached --no-color ".extra." > ".name)
-    if exists("l:oldgit")
-        let $GIT_DIR = oldgit
-    endif
+    call system(git." diff --cached --no-color ".extra." > ".name)
     exe "pedit ".name
     wincmd P
     let b:git_dir = a:gitdir
     command! -bang -bar -buffer -complete=custom,s:diffcomplete -nargs=* DiffGitCached :call s:gitdiffcached(<bang>0,b:git_dir,<f-args>)
     nnoremap <silent> q :q<CR>
-    setlocal buftype=nowrite nobuflisted noswapfile nomodifiable filetype=diff
-    setlocal keywordprg=git\ show includeexpr=substitute(v:fname,'^[ab]/','','')
-    if strpart(&l:path,0,strlen(tree)) != tree
-        let &l:path = tree.','.&l:path
-    endif
+    setlocal buftype=nowrite nobuflisted noswapfile nomodifiable filetype=gitlog
 endfunction
