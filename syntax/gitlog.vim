@@ -1,14 +1,14 @@
 " Vim syntax file
-" Language:     Gitobject
-" Maintainer:   Tim Pope
-" Filenames:    *.gitlog
+" Language:	git log
+" Maintainer:	Tim Pope <vimNOSPAM@tpope.info>
+" Last Change:	2008 Feb 27
 
 if exists("b:current_syntax")
     finish
 endif
 
 syn case match
-syn sync minlines=10
+syn sync minlines=50
 
 syn include @gitlogDiff syntax/diff.vim
 
@@ -56,5 +56,3 @@ hi def link gitlogReference         Function
 hi def link gitlogType              Type
 
 let b:current_syntax = "gitlog"
-
-" vim:set sts=4 sw=4:
