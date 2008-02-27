@@ -22,7 +22,9 @@ endif
 syn region gitlogDiff start=/\%(^diff --git \)\@=/ end=/^$/ contains=@gitlogDiff fold
 
 syn match  gitlogKeyword /^\%(object\|type\|tag\|commit\|tree\|parent\)\>/ contained containedin=gitlogHead nextgroup=gitlogHash,gitlogType skipwhite
-syn match  gitlogKeyword /^\%(tag\>\|ref:\)/ contained containedin=gitlogHead nextgroup=gitlogReference skipwhite skipwhite
+syn match  gitlogKeyword /^\%(tag\>\|ref:\)/ contained containedin=gitlogHead nextgroup=gitlogReference skipwhite
+syn match  gitlogKeyword /\<\%(blob\|tree\)\>/ contained nextgroup=gitlogHash skipwhite
+syn match  gitlogMode    /^\d\{6\}/ contained containedin=gitlogHead nextgroup=gitlogKeyword skipwhite
 syn match  gitlogIdentityKeyword /^\%(author\|committer\|tagger\)\>/ contained containedin=gitlogHead nextgroup=gitlogIdentity skipwhite
 syn match  gitlogIdentityHeader /^\%(Author\|Commit\|Tagger\):/ contained containedin=gitlogHead nextgroup=gitlogIdentity skipwhite
 syn match  gitlogDateHeader /^\%(AuthorDate\|CommitDate\|Date\):/ contained containedin=gitlogHead nextgroup=gitlogDate skipwhite
@@ -50,6 +52,7 @@ hi def link gitlogIdentity          String
 hi def link gitlogEmailDelimiter    Delimiter
 hi def link gitlogEmail             Special
 hi def link gitlogDate              Number
+hi def link gitlogMode              Number
 hi def link gitlogHash              Identifier
 hi def link gitlogReflogMiddle      gitlogReference
 hi def link gitlogReference         Function
