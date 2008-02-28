@@ -21,7 +21,7 @@ endif
 
 syn region gitDiff start=/\%(^diff --git \)\@=/ end=/^$/ contains=@gitDiff fold
 
-syn match  gitKeyword /^\%(object\|type\|tag\|commit\|tree\|parent\)\>/ contained containedin=gitHead nextgroup=gitHash,gitType skipwhite
+syn match  gitKeyword /^\%(object\|type\|tag\|commit\|tree\|parent\|encoding\)\>/ contained containedin=gitHead nextgroup=gitHash,gitType skipwhite
 syn match  gitKeyword /^\%(tag\>\|ref:\)/ contained containedin=gitHead nextgroup=gitReference skipwhite
 syn match  gitMode    /^\d\{6\}/ contained containedin=gitHead nextgroup=gitType skipwhite
 syn match  gitIdentityKeyword /^\%(author\|committer\|tagger\)\>/ contained containedin=gitHead nextgroup=gitIdentity skipwhite
