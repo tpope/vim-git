@@ -14,12 +14,14 @@ syn include @gitDiff syntax/diff.vim
 
 syn region gitHead start=/\%^/ end=/^$/
 syn region gitHead start=/\%(^commit \x\{40\}$\)\@=/ end=/^$/
-if getline(1) =~ '^\x\{40\} \x\{40\} '
-    " raw reflog: match everything to avoid sync issues
-    syn region gitHead start=/^/ end=/$/
-endif
 
-syn region gitDiff start=/\%(^diff --git \)\@=/ end=/^$/ contains=@gitDiff fold
+" For git reflog and git show ...^{tree}, avoid sync issues
+syn match gitHead /^\d\{6\} \w\{4} \x\{40\}\t.*/
+syn match gitHead /^\x\{40\} \x\{40}\t.*/
+syn region gitHead start=/^/ end=/$/
+
+syn region gitDiff start=/^\%(diff --git \)\@=/ end=/^\%(diff --git \|$\)\@=/ contains=@gitDiff fold
+syn region gitDiff start=/^\%(@@ -\)\@=/ end=/^\%(diff --git \|$\)\@=/ contains=@gitDiff
 
 syn match  gitKeyword /^\%(object\|type\|tag\|commit\|tree\|parent\|encoding\)\>/ contained containedin=gitHead nextgroup=gitHash,gitType skipwhite
 syn match  gitKeyword /^\%(tag\>\|ref:\)/ contained containedin=gitHead nextgroup=gitReference skipwhite
@@ -34,7 +36,7 @@ syn match  gitReflogHeader /^Reflog:/ contained containedin=gitHead nextgroup=gi
 syn match  gitReflogHeader /^Reflog message:/ contained containedin=gitHead skipwhite
 syn match  gitReflogMiddle /\S\+@{\d\+} (/he=e-2 nextgroup=gitIdentity
 
-syn match  gitDate      /\<\u\l\l \u\l\l \d\d \d\d:\d\d:\d\d \d\d\d\d [+-]\d\d\d\d/ contained
+syn match  gitDate      /\<\u\l\l \u\l\l \d\=\d \d\d:\d\d:\d\d \d\d\d\d [+-]\d\d\d\d/ contained
 syn match  gitDate      /-\=\d\+ [+-]\d\d\d\d\>/               contained
 syn match  gitDate      /\<\d\+ \l\+ ago\>/                    contained
 syn match  gitType      /\<\%(tag\|commit\|tree\|blob\)\>/     contained nextgroup=gitHash skipwhite
