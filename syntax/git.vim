@@ -16,7 +16,7 @@ syn region gitHead start=/\%^/ end=/^$/
 syn region gitHead start=/\%(^commit \x\{40\}$\)\@=/ end=/^$/
 
 " For git reflog and git show ...^{tree}, avoid sync issues
-syn match gitHead /^\d\{6\} \w\{4} \x\{40\}\t.*/
+syn match gitHead /^\d\{6\} \%(\w\{4} \)\=\x\{40\}\%( [0-3]\)\=\t.*/
 syn match gitHead /^\x\{40\} \x\{40}\t.*/
 syn region gitHead start=/^/ end=/$/
 
@@ -25,7 +25,7 @@ syn region gitDiff start=/^\%(@@ -\)\@=/ end=/^\%(diff --git \|$\)\@=/ contains=
 
 syn match  gitKeyword /^\%(object\|type\|tag\|commit\|tree\|parent\|encoding\)\>/ contained containedin=gitHead nextgroup=gitHash,gitType skipwhite
 syn match  gitKeyword /^\%(tag\>\|ref:\)/ contained containedin=gitHead nextgroup=gitReference skipwhite
-syn match  gitMode    /^\d\{6\}/ contained containedin=gitHead nextgroup=gitType skipwhite
+syn match  gitMode    /^\d\{6\}/ contained containedin=gitHead nextgroup=gitType,gitHash skipwhite
 syn match  gitIdentityKeyword /^\%(author\|committer\|tagger\)\>/ contained containedin=gitHead nextgroup=gitIdentity skipwhite
 syn match  gitIdentityHeader /^\%(Author\|Commit\|Tagger\):/ contained containedin=gitHead nextgroup=gitIdentity skipwhite
 syn match  gitDateHeader /^\%(AuthorDate\|CommitDate\|Date\):/ contained containedin=gitHead nextgroup=gitDate skipwhite
@@ -40,8 +40,9 @@ syn match  gitDate      /\<\u\l\l \u\l\l \d\=\d \d\d:\d\d:\d\d \d\d\d\d [+-]\d\d
 syn match  gitDate      /-\=\d\+ [+-]\d\d\d\d\>/               contained
 syn match  gitDate      /\<\d\+ \l\+ ago\>/                    contained
 syn match  gitType      /\<\%(tag\|commit\|tree\|blob\)\>/     contained nextgroup=gitHash skipwhite
+syn match  gitStage     /\<\d\t\@=/                            contained
 syn match  gitReference /\S\+\S\@!/                            contained
-syn match  gitHash      /\<\x\{40\}\>/                         contained nextgroup=gitIdentity skipwhite
+syn match  gitHash      /\<\x\{40\}\>/                         contained nextgroup=gitIdentity,gitStage skipwhite
 syn match  gitHash      /^\<\x\{40\}\>/ containedin=gitHead contained nextgroup=gitHash skipwhite
 
 hi def link gitDateHeader        gitIdentityHeader
@@ -57,6 +58,7 @@ hi def link gitMode              Number
 hi def link gitHash              Identifier
 hi def link gitReflogMiddle      gitReference
 hi def link gitReference         Function
+hi def link gitStage             gitType
 hi def link gitType              Type
 
 let b:current_syntax = "git"
