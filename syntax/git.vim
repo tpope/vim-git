@@ -18,7 +18,6 @@ syn region gitHead start=/\%(^commit \x\{40\}$\)\@=/ end=/^$/
 " For git reflog and git show ...^{tree}, avoid sync issues
 syn match gitHead /^\d\{6\} \%(\w\{4} \)\=\x\{40\}\%( [0-3]\)\=\t.*/
 syn match gitHead /^\x\{40\} \x\{40}\t.*/
-syn region gitHead start=/^/ end=/$/
 
 syn region gitDiff start=/^\%(diff --git \)\@=/ end=/^\%(diff --git \|$\)\@=/ contains=@gitDiff fold
 syn region gitDiff start=/^\%(@@ -\)\@=/ end=/^\%(diff --git \|$\)\@=/ contains=@gitDiff
