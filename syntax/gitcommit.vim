@@ -11,12 +11,12 @@ endif
 syn case match
 syn sync minlines=50
 
-syn include @gitcommitDiff syntax/diff.vim
-syn region gitcommitDiff start=/\%(^diff --git \)\@=/ end=/^$\|^#\@=/ contains=@gitcommitDiff
-
 if has("spell")
     syn spell toplevel
 endif
+
+syn include @gitcommitDiff syntax/diff.vim
+syn region gitcommitDiff start=/\%(^diff --git \)\@=/ end=/^$\|^#\@=/ contains=@gitcommitDiff
 
 syn match   gitcommitFirstLine	"\%^[^#].*"  nextgroup=gitcommitBlank skipnl
 syn match   gitcommitSummary  	"^.\{0,50\}" contained containedin=gitcommitFirstLine nextgroup=gitcommitOverflow contains=@Spell
