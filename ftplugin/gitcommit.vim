@@ -51,7 +51,7 @@ function! s:gitdiffcached(bang,gitdir,...)
     let name = tempname()
     let git = "git"
     if strpart(getcwd(),0,strlen(tree)) != tree
-        let git .= " --git-dir=".has("*shellescape") ? shellescape(a:gitdir) : '\"'.a:gitdir.'\"'
+        let git .= " --git-dir=".(exists("*shellescape") ? shellescape(a:gitdir) : '"'.a:gitdir.'"')
     endif
     if a:0
         let extra = join(map(copy(a:000),has("*shellescape") ? 'shellescape(v:val)' : "'\"'.v:val.'\"'"))
