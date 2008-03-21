@@ -11,7 +11,7 @@ augroup FTgit
                 \ if getline(1) =~ '^\x\{40\}\>\|^ref: ' |
                 \ set ft=git |
                 \ endif
-    autocmd BufNewFile,BufRead *
+    autocmd BufNewFile,BufRead,StdinReadPost *
                 \ if getline(1) =~ '^\(commit\|tree\|object\) \x\{40\}$' ||
                 \    getline(1)."\n".getline(2) =~ '^tag .*\nTagger: ' |
                 \ set ft=git |
