@@ -24,6 +24,7 @@ syn region gitDiff start=/^\%(@@ -\)\@=/ end=/^\%(diff --git \|$\)\@=/ contains=
 
 syn match  gitKeyword /^\%(object\|type\|tag\|commit\|tree\|parent\|encoding\)\>/ contained containedin=gitHead nextgroup=gitHash,gitType skipwhite
 syn match  gitKeyword /^\%(tag\>\|ref:\)/ contained containedin=gitHead nextgroup=gitReference skipwhite
+syn match  gitKeyword /^Merge:/  contained containedin=gitHead nextgroup=gitHashAbbrev skipwhite
 syn match  gitMode    /^\d\{6\}/ contained containedin=gitHead nextgroup=gitType,gitHash skipwhite
 syn match  gitIdentityKeyword /^\%(author\|committer\|tagger\)\>/ contained containedin=gitHead nextgroup=gitIdentity skipwhite
 syn match  gitIdentityHeader /^\%(Author\|Commit\|Tagger\):/ contained containedin=gitHead nextgroup=gitIdentity skipwhite
@@ -43,6 +44,8 @@ syn match  gitStage     /\<\d\t\@=/                            contained
 syn match  gitReference /\S\+\S\@!/                            contained
 syn match  gitHash      /\<\x\{40\}\>/                         contained nextgroup=gitIdentity,gitStage skipwhite
 syn match  gitHash      /^\<\x\{40\}\>/ containedin=gitHead contained nextgroup=gitHash skipwhite
+syn match  gitHashAbbrev /\<\x\{4,39\}\.\.\./he=e-3 contained nextgroup=gitHashAbbrev skipwhite
+syn match  gitHashAbbrev /\<\x\{40\}\>/             contained nextgroup=gitHashAbbrev skipwhite
 
 hi def link gitDateHeader        gitIdentityHeader
 hi def link gitIdentityHeader    gitIdentityKeyword
@@ -54,6 +57,7 @@ hi def link gitEmailDelimiter    Delimiter
 hi def link gitEmail             Special
 hi def link gitDate              Number
 hi def link gitMode              Number
+hi def link gitHashAbbrev        gitHash
 hi def link gitHash              Identifier
 hi def link gitReflogMiddle      gitReference
 hi def link gitReference         Function
