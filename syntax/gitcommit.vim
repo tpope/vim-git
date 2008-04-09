@@ -2,7 +2,7 @@
 " Language:	git commit file
 " Maintainer:	Tim Pope <vimNOSPAM@tpope.info>
 " Filenames:	*.git/COMMIT_EDITMSG
-" Last Change:	2008 Feb 21
+" Last Change:	2008 Apr 09
 
 if exists("b:current_syntax")
     finish
@@ -31,12 +31,15 @@ syn match   gitcommitHeader	"\%(^# \)\@<=.*:$"	contained containedin=gitcommitCo
 syn region  gitcommitUntracked	start=/^# Untracked files:/ end=/^#$\|^#\@!/ contains=gitcommitHeader,gitcommitHead,gitcommitUntrackedFile fold
 syn match   gitcommitUntrackedFile  "\t\@<=.*"	contained
 
-syn region  gitcommitDiscarded	start=/^# Changed but not updated:/ end=/^#$\|^#\@!/ contains=gitcommitHeader,gitcommitHead,gitcommitType fold
-syn region  gitcommitSelected	start=/^# Changes to be committed:/ end=/^#$\|^#\@!/ contains=gitcommitHeader,gitcommitHead,gitcommitType fold
+syn region  gitcommitDiscarded	start=/^# Changed but not updated:/ end=/^#$\|^#\@!/ contains=gitcommitHeader,gitcommitHead,gitcommitDiscardedType fold
+syn region  gitcommitSelected	start=/^# Changes to be committed:/ end=/^#$\|^#\@!/ contains=gitcommitHeader,gitcommitHead,gitcommitSelectedType fold
 
-syn match   gitcommitType	"\t\@<=[a-z][a-z ]*[a-z]: "he=e-2	contained containedin=gitcommitComment nextgroup=gitcommitFile skipwhite
-syn match   gitcommitFile	".\{-\}\%($\| -> \)\@=" contained nextgroup=gitcommitArrow
-syn match   gitcommitArrow	" -> " contained nextgroup=gitcommitFile transparent
+syn match   gitcommitDiscardedType	"\t\@<=[a-z][a-z ]*[a-z]: "he=e-2	contained containedin=gitcommitComment nextgroup=gitcommitDiscardedFile skipwhite
+syn match   gitcommitSelectedType	"\t\@<=[a-z][a-z ]*[a-z]: "he=e-2	contained containedin=gitcommitComment nextgroup=gitcommitSelectedFile skipwhite
+syn match   gitcommitDiscardedFile	".\{-\}\%($\| -> \)\@=" contained nextgroup=gitcommitDiscardedArrow
+syn match   gitcommitSelectedFile	".\{-\}\%($\| -> \)\@=" contained nextgroup=gitcommitSelectedArrow
+syn match   gitcommitDiscardedArrow	" -> " contained nextgroup=gitcommitDiscardedFile
+syn match   gitcommitSelectedArrow	" -> " contained nextgroup=gitcommitSelectedFile
 
 hi def link gitcommitSummary		Keyword
 hi def link gitcommitComment		Comment
@@ -45,10 +48,17 @@ hi def link gitcommitDiscarded		gitcommitComment
 hi def link gitcommitSelected		gitcommitComment
 hi def link gitcommitOnBranch		Comment
 hi def link gitcommitBranch		Special
+hi def link gitcommitDiscardedType	gitcommitType
+hi def link gitcommitSelectedType	gitcommitType
 hi def link gitcommitType		Type
 hi def link gitcommitHeader		PreProc
-hi def link gitcommitFile		Constant
 hi def link gitcommitUntrackedFile	gitcommitFile
+hi def link gitcommitDiscardedFile	gitcommitFile
+hi def link gitcommitSelectedFile	gitcommitFile
+hi def link gitcommitFile		Constant
+hi def link gitcommitDiscardedArrow	gitcommitArrow
+hi def link gitcommitSelectedArrow	gitcommitArrow
+hi def link gitcommitArrow		gitcommitComment
 "hi def link gitcommitOverflow		Error
 hi def link gitcommitBlank		Error
 
