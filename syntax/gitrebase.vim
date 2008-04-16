@@ -2,7 +2,7 @@
 " Language:	git rebase --interactive
 " Maintainer:	Tim Pope <vimNOSPAM@tpope.info>
 " Filenames:	git-rebase-todo
-" Last Change:	2008 Feb 21
+" Last Change:	2008 Apr 16
 
 if exists("b:current_syntax")
     finish
@@ -18,6 +18,7 @@ syn match   gitrebaseEdit   "\v^e%(dit)=>"   nextgroup=gitrebaseCommit skipwhite
 syn match   gitrebaseSquash "\v^s%(quash)=>" nextgroup=gitrebaseCommit skipwhite
 syn match   gitrebaseSummary ".*"               contains=gitrebaseHash contained
 syn match   gitrebaseComment "^#.*"             contains=gitrebaseHash
+syn match   gitrebaseSquashError "\v%^s%(quash)=>" nextgroup=gitrebaseCommit skipwhite
 
 hi def link gitrebaseCommit         gitrebaseHash
 hi def link gitrebaseHash           Identifier
@@ -26,5 +27,6 @@ hi def link gitrebaseEdit           PreProc
 hi def link gitrebaseSquash         Type
 hi def link gitrebaseSummary        String
 hi def link gitrebaseComment        Comment
+hi def link gitrebaseSquashError     Error
 
 let b:current_syntax = "gitrebase"
