@@ -17,6 +17,21 @@ if !exists("b:undo_ftplugin")
 endif
 let b:undo_ftplugin = b:undo_ftplugin."|setl com< cms< fo<"
 
+function! s:choose(word)
+    s/^\(\w\+\>\)\=\(\s*\)\ze\x\{4,40\}\>/\=(strlen(submatch(1)) == 1 ? a:word[0] : a:word) . substitute(submatch(2),'^$',' ','')/e
+endfunction
+
+function! s:cycle()
+    call s:choose(get({'s':'edit','p':'squash'},getline('.')[0],'pick'))
+endfunction
+
+command! -buffer -bar Pick   :call s:choose('pick')
+command! -buffer -bar Squash :call s:choose('squash')
+command! -buffer -bar Edit   :call s:choose('edit')
+command! -buffer -bar Cycle  :call s:cycle()
+" The above are more useful when they are mapped; for example:
+"nnoremap <buffer> <silent> S :Cycle<CR>
+
 if exists("g:no_plugin_maps") || exists("g:no_gitrebase_maps")
     finish
 endif
