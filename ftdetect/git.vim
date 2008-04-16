@@ -1,17 +1,18 @@
 " Git
-autocmd BufNewFile,BufRead *.git/COMMIT_EDITMSG    setf gitcommit
-autocmd BufNewFile,BufRead *.git/config,.gitconfig setf gitconfig
-autocmd BufNewFile,BufRead git-rebase-todo         setf gitrebase
+autocmd BufNewFile,BufRead *.git/COMMIT_EDITMSG    set ft=gitcommit
+autocmd BufNewFile,BufRead *.git/config,.gitconfig set ft=gitconfig
+autocmd BufNewFile,BufRead git-rebase-todo         set ft=gitrebase
 autocmd BufNewFile,BufRead .msg.[0-9]*
       \ if getline(1) =~ '^From.*# This line is ignored.$' |
-      \   setf gitsendemail |
+      \   set ft=gitsendemail |
       \ endif
 autocmd BufNewFile,BufRead *.git/**
       \ if getline(1) =~ '^\x\{40\}\>\|^ref: ' |
-      \   setf git |
+      \   set ft=git |
       \ endif
 
+" This logic really belongs in scripts.vim
 autocmd BufNewFile,BufRead,StdinReadPost *
       \ if getline(1) =~ '^\(commit\|tree\|object\) \x\{40\}$\|^tag \S\+$' |
-      \   setf git |
+      \   set ft=git |
       \ endif
