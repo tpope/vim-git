@@ -9,7 +9,6 @@ if exists("b:current_syntax")
 endif
 
 syn case match
-syn sync minlines=10
 
 syn match   gitrebaseHash   "\v<\x{7,40}>"                             contained
 syn match   gitrebaseCommit "\v<\x{7,40}>"  nextgroup=gitrebaseSummary skipwhite
