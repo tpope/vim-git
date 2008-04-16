@@ -1,7 +1,7 @@
 " Vim syntax file
 " Language:	generic git output
 " Maintainer:	Tim Pope <vimNOSPAM@tpope.info>
-" Last Change:	2008 Feb 27
+" Last Change:	2008 Mar 21
 
 if exists("b:current_syntax")
     finish
