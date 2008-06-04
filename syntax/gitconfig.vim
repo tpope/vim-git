@@ -2,15 +2,16 @@
 " Language:	git config file
 " Maintainer:	Tim Pope <vimNOSPAM@tpope.info>
 " Filenames:	gitconfig, .gitconfig, *.git/config
-" Last Change:	2007 Dec 16
+" Last Change:	2008 Jun 04
 
 if exists("b:current_syntax")
     finish
 endif
 
-syn case ignore
 setlocal iskeyword+=-
 setlocal iskeyword-=_
+syn case ignore
+syn sync minlines=10
 
 syn match   gitconfigComment	"[#;].*"
 syn match   gitconfigSection	"\%(^\s*\)\@<=\[[a-z0-9.-]\+\]"
