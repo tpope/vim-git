@@ -22,7 +22,7 @@ endif
 
 if exists('*shellescape') && exists('b:git_dir') && b:git_dir != ''
     if b:git_dir =~# '/\.git$' " Not a bare repository
-        let &l:path = escape(fnamemodify(b:git_dir,':t'),'\, ').','.&l:path
+        let &l:path = escape(fnamemodify(b:git_dir,':h'),'\, ').','.&l:path
     endif
     let &l:path = escape(b:git_dir,'\, ').','.&l:path
     let &l:keywordprg = 'git --git-dir='.shellescape(b:git_dir).' show'
