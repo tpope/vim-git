@@ -13,6 +13,6 @@ autocmd BufNewFile,BufRead *.git/**
 
 " This logic really belongs in scripts.vim
 autocmd BufNewFile,BufRead,StdinReadPost *
-      \ if getline(1) =~ '^\(commit\|tree\|object\) \x\{40\}$\|^tag \S\+$' |
+      \ if getline(1) =~ '^\(commit\|tree\|object\) \x\{40\}\>\|^tag \S\+$' |
       \   set ft=git |
       \ endif
