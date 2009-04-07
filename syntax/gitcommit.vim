@@ -23,7 +23,7 @@ syn match   gitcommitSummary  	"^.\{0,50\}" contained containedin=gitcommitFirst
 syn match   gitcommitOverflow	".*" contained contains=@Spell
 syn match   gitcommitBlank	"^[^#].*" contained contains=@Spell
 syn match   gitcommitComment	"^#.*"
-syn region  gitcommitHead	start=/^#   / end=/^#$/ contained transparent
+syn match   gitcommitHead	"^\%(#   .*\n\)\+#$" contained transparent
 syn match   gitcommitOnBranch	"\%(^# \)\@<=On branch" contained containedin=gitcommitComment nextgroup=gitcommitBranch skipwhite
 syn match   gitcommitBranch	"\S\+" contained
 syn match   gitcommitHeader	"\%(^# \)\@<=.*:$"	contained containedin=gitcommitComment
