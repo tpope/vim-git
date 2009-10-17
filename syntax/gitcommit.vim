@@ -27,6 +27,7 @@ syn match   gitcommitHead	"^\%(#   .*\n\)\+#$" contained transparent
 syn match   gitcommitOnBranch	"\%(^# \)\@<=On branch" contained containedin=gitcommitComment nextgroup=gitcommitBranch skipwhite
 syn match   gitcommitBranch	"\S\+" contained
 syn match   gitcommitHeader	"\%(^# \)\@<=.*:$"	contained containedin=gitcommitComment
+syn region  gitcommitAuthor	matchgroup=gitCommitHeader start=/\%(^# \)\@<=Author:/ end=/$/ keepend oneline contained containedin=gitcommitComment transparent
 
 syn region  gitcommitUntracked	start=/^# Untracked files:/ end=/^#$\|^#\@!/ contains=gitcommitHeader,gitcommitHead,gitcommitUntrackedFile fold
 syn match   gitcommitUntrackedFile  "\t\@<=.*"	contained
