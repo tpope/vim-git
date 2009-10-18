@@ -29,6 +29,9 @@ if exists('*shellescape') && exists('b:git_dir') && b:git_dir != ''
 else
     setlocal keywordprg=git\ show
 endif
+if has('gui_running')
+  let &l:keywordprg = substitute(&l:keywordprg,'^git\>','git --no-pager','')
+endif
 
 setlocal includeexpr=substitute(v:fname,'^[^/]\\+/','','')
 let b:undo_ftplugin = "setl keywordprg< path< includeexpr<"
