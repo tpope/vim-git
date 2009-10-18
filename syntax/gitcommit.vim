@@ -43,6 +43,10 @@ syn match   gitcommitSelectedFile	".\{-\}\%($\| -> \)\@=" contained nextgroup=gi
 syn match   gitcommitDiscardedArrow	" -> " contained nextgroup=gitcommitDiscardedFile
 syn match   gitcommitSelectedArrow	" -> " contained nextgroup=gitcommitSelectedFile
 
+syn match   gitcommitBegin		"\%^" nextgroup=gitcommitWarning,gitcommitSummary
+syn match   gitcommitWarning		"^[^#].*: needs merge$" nextgroup=gitcommitWarning skipnl contained
+syn match   gitcommitWarning		"^no changes added to commit\>.*\%$"
+
 hi def link gitcommitSummary		Keyword
 hi def link gitcommitComment		Comment
 hi def link gitcommitUntracked		gitcommitComment
