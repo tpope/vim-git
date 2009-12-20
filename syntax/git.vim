@@ -19,8 +19,13 @@ syn region gitHead start=/\%(^commit \x\{40\}\%(\s*(.*)\)\=$\)\@=/ end=/^$/
 syn match gitHead /^\d\{6\} \%(\w\{4} \)\=\x\{40\}\%( [0-3]\)\=\t.*/
 syn match gitHead /^\x\{40\} \x\{40}\t.*/
 
-syn region gitDiff start=/^\%(diff --git \)\@=/ end=/^\%(diff --git \|$\)\@=/ contains=@gitDiff fold
-syn region gitDiff start=/^\%(@@ -\)\@=/ end=/^\%(diff --git \|$\)\@=/ contains=@gitDiff
+syn region gitDiff start=/^\%(diff --git \)\@=/ end=/^\%(diff --\|$\)\@=/ contains=@gitDiff fold
+syn region gitDiff start=/^\%(@@ -\)\@=/ end=/^\%(diff --\%(git\|cc\|combined\) \|$\)\@=/ contains=@gitDiff
+
+syn region gitDiffMerge start=/^\%(diff --\%(cc\|combined\) \)\@=/ end=/^\%(diff --\|$\)\@=/ contains=@gitDiff
+syn region gitDiffMerge start=/^\%(@@@@* -\)\@=/ end=/^\%(diff --\|$\)\@=/ contains=@gitDiff
+syn match gitDiffAdded "^ \++.*" contained containedin=gitDiffMerge
+syn match gitDiffRemoved "^ \+-.*" contained containedin=gitDiffMerge
 
 syn match  gitKeyword /^\%(object\|type\|tag\|commit\|tree\|parent\|encoding\)\>/ contained containedin=gitHead nextgroup=gitHash,gitType skipwhite
 syn match  gitKeyword /^\%(tag\>\|ref:\)/ contained containedin=gitHead nextgroup=gitReference skipwhite
@@ -66,5 +71,7 @@ hi def link gitReflogMiddle      gitReference
 hi def link gitReference         Function
 hi def link gitStage             gitType
 hi def link gitType              Type
+hi def link gitDiffAdded         diffAdded
+hi def link gitDiffRemoved       diffRemoved
 
 let b:current_syntax = "git"
