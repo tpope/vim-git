@@ -1,7 +1,7 @@
 " Vim syntax file
 " Language:	generic git output
 " Maintainer:	Tim Pope <vimNOSPAM@tpope.info>
-" Last Change:	2008 Mar 21
+" Last Change:	2009 Dec 21
 
 if exists("b:current_syntax")
     finish
@@ -44,8 +44,8 @@ syn match  gitStage     /\<\d\t\@=/                            contained
 syn match  gitReference /\S\+\S\@!/                            contained
 syn match  gitHash      /\<\x\{40\}\>/                         contained nextgroup=gitIdentity,gitStage skipwhite
 syn match  gitHash      /^\<\x\{40\}\>/ containedin=gitHead contained nextgroup=gitHash skipwhite
+syn match  gitHashAbbrev /\<\x\{4,40\}\>/           contained nextgroup=gitHashAbbrev skipwhite
 syn match  gitHashAbbrev /\<\x\{4,39\}\.\.\./he=e-3 contained nextgroup=gitHashAbbrev skipwhite
-syn match  gitHashAbbrev /\<\x\{40\}\>/             contained nextgroup=gitHashAbbrev skipwhite
 
 hi def link gitDateHeader        gitIdentityHeader
 hi def link gitIdentityHeader    gitIdentityKeyword
