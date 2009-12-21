@@ -47,9 +47,12 @@ syn match  gitHash      /^\<\x\{40\}\>/ containedin=gitHead contained nextgroup=
 syn match  gitHashAbbrev /\<\x\{4,40\}\>/           contained nextgroup=gitHashAbbrev skipwhite
 syn match  gitHashAbbrev /\<\x\{4,39\}\.\.\./he=e-3 contained nextgroup=gitHashAbbrev skipwhite
 
+syn match  gitNotesHeader /^Notes:\ze\n    /
+
 hi def link gitDateHeader        gitIdentityHeader
 hi def link gitIdentityHeader    gitIdentityKeyword
 hi def link gitIdentityKeyword   Label
+hi def link gitNotesHeader       gitKeyword
 hi def link gitReflogHeader      gitKeyword
 hi def link gitKeyword           Keyword
 hi def link gitIdentity          String
