@@ -28,6 +28,6 @@ hi def link gitrebaseReword         Special
 hi def link gitrebaseSquash         Type
 hi def link gitrebaseSummary        String
 hi def link gitrebaseComment        Comment
-hi def link gitrebaseSquashError     Error
+hi def link gitrebaseSquashError    Error
 
 let b:current_syntax = "gitrebase"
