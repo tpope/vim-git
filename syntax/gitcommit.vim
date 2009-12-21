@@ -36,13 +36,17 @@ syn match   gitcommitUntrackedFile  "\t\@<=.*"	contained
 
 syn region  gitcommitDiscarded	start=/^# Changed but not updated:/ end=/^#$\|^#\@!/ contains=gitcommitHeader,gitcommitHead,gitcommitDiscardedType fold
 syn region  gitcommitSelected	start=/^# Changes to be committed:/ end=/^#$\|^#\@!/ contains=gitcommitHeader,gitcommitHead,gitcommitSelectedType fold
+syn region  gitcommitUnmerged	start=/^# Unmerged paths:/ end=/^#$\|^#\@!/ contains=gitcommitHeader,gitcommitHead,gitcommitUnmergedType fold
 
 syn match   gitcommitDiscardedType	"\t\@<=[a-z][a-z ]*[a-z]: "he=e-2	contained containedin=gitcommitComment nextgroup=gitcommitDiscardedFile skipwhite
 syn match   gitcommitSelectedType	"\t\@<=[a-z][a-z ]*[a-z]: "he=e-2	contained containedin=gitcommitComment nextgroup=gitcommitSelectedFile skipwhite
+syn match   gitcommitUnmergedType	"\t\@<=[a-z][a-z ]*[a-z]: "he=e-2	contained containedin=gitcommitComment nextgroup=gitcommitUnmergedFile skipwhite
 syn match   gitcommitDiscardedFile	".\{-\}\%($\| -> \)\@=" contained nextgroup=gitcommitDiscardedArrow
 syn match   gitcommitSelectedFile	".\{-\}\%($\| -> \)\@=" contained nextgroup=gitcommitSelectedArrow
+syn match   gitcommitUnmergedFile	".\{-\}\%($\| -> \)\@=" contained nextgroup=gitcommitSelectedArrow
 syn match   gitcommitDiscardedArrow	" -> " contained nextgroup=gitcommitDiscardedFile
 syn match   gitcommitSelectedArrow	" -> " contained nextgroup=gitcommitSelectedFile
+syn match   gitcommitUnmergedArrow	" -> " contained nextgroup=gitcommitSelectedFile
 
 syn match   gitcommitWarning		"\%^[^#].*: needs merge$" nextgroup=gitcommitWarning skipnl
 syn match   gitcommitWarning		"^[^#].*: needs merge$" nextgroup=gitcommitWarning skipnl contained
@@ -53,20 +57,24 @@ hi def link gitcommitComment		Comment
 hi def link gitcommitUntracked		gitcommitComment
 hi def link gitcommitDiscarded		gitcommitComment
 hi def link gitcommitSelected		gitcommitComment
+hi def link gitcommitUnmerged		gitcommitComment
 hi def link gitcommitOnBranch		Comment
 hi def link gitcommitBranch		Special
 hi def link gitcommitNoBranch		gitCommitBranch
 hi def link gitcommitDiscardedType	gitcommitType
 hi def link gitcommitSelectedType	gitcommitType
+hi def link gitcommitUnmergedType	gitcommitType
 hi def link gitcommitType		Type
 hi def link gitcommitNoChanges		gitcommitHeader
 hi def link gitcommitHeader		PreProc
 hi def link gitcommitUntrackedFile	gitcommitFile
 hi def link gitcommitDiscardedFile	gitcommitFile
 hi def link gitcommitSelectedFile	gitcommitFile
+hi def link gitcommitUnmergedFile	gitcommitFile
 hi def link gitcommitFile		Constant
 hi def link gitcommitDiscardedArrow	gitcommitArrow
 hi def link gitcommitSelectedArrow	gitcommitArrow
+hi def link gitcommitUnmergedArrow	gitcommitArrow
 hi def link gitcommitArrow		gitcommitComment
 "hi def link gitcommitOverflow		Error
 hi def link gitcommitBlank		Error
