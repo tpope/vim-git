@@ -2,7 +2,6 @@
 " Language:	git commit file
 " Maintainer:	Tim Pope <vimNOSPAM@tpope.info>
 " Filenames:	*.git/COMMIT_EDITMSG
-" Last Change:	2009 Dec 21
 
 if exists("b:current_syntax")
     finish

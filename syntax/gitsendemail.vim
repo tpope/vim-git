@@ -2,7 +2,6 @@
 " Language:	git send-email message
 " Maintainer:	Tim Pope
 " Filenames:	*.msg.[0-9]* (first line is "From ... # This line is ignored.")
-" Last Change:	2007 Dec 16
 
 if exists("b:current_syntax")
     finish

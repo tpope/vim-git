@@ -1,7 +1,6 @@
 " Vim filetype plugin
 " Language:	git commit file
 " Maintainer:	Tim Pope <vimNOSPAM@tpope.info>
-" Last Change:	2008 Nov 10
 
 " Only do this when not done yet for this buffer
 if (exists("b:did_ftplugin"))
