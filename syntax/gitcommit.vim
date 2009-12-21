@@ -1,6 +1,6 @@
 " Vim syntax file
 " Language:	git commit file
-" Maintainer:	Tim Pope <vimNOSPAM@tpope.info>
+" Maintainer:	Tim Pope <vimNOSPAM@tpope.org>
 " Filenames:	*.git/COMMIT_EDITMSG
 
 if exists("b:current_syntax")
