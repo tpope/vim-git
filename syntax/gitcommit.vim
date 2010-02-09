@@ -28,7 +28,7 @@ syn match   gitcommitOnBranch	"\%(^# \)\@<=Your branch .\{-\} '" contained conta
 syn match   gitcommitBranch	"[^ \t']\+" contained
 syn match   gitcommitNoBranch	"\%(^# \)\@<=Not currently on any branch." contained containedin=gitcommitComment
 syn match   gitcommitHeader	"\%(^# \)\@<=.*:$"	contained containedin=gitcommitComment
-syn region  gitcommitAuthor	matchgroup=gitCommitHeader start=/\%(^# \)\@<=Author:/ end=/$/ keepend oneline contained containedin=gitcommitComment transparent
+syn region  gitcommitAuthor	matchgroup=gitCommitHeader start=/\%(^# \)\@<=\%(Author\|Committer\):/ end=/$/ keepend oneline contained containedin=gitcommitComment transparent
 syn match   gitcommitNoChanges	"\%(^# \)\@<=No changes$" contained containedin=gitcommitComment
 
 syn region  gitcommitUntracked	start=/^# Untracked files:/ end=/^#$\|^#\@!/ contains=gitcommitHeader,gitcommitHead,gitcommitUntrackedFile fold
