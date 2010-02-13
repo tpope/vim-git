@@ -4,7 +4,7 @@
 " Filenames:	*.msg.[0-9]* (first line is "From ... # This line is ignored.")
 
 if exists("b:current_syntax")
-    finish
+  finish
 endif
 
 runtime! syntax/mail.vim

@@ -4,7 +4,7 @@
 " Filenames:	gitconfig, .gitconfig, *.git/config
 
 if exists("b:current_syntax")
-    finish
+  finish
 endif
 
 setlocal iskeyword+=-

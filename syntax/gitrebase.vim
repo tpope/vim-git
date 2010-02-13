@@ -4,7 +4,7 @@
 " Filenames:	git-rebase-todo
 
 if exists("b:current_syntax")
-    finish
+  finish
 endif
 
 syn case match

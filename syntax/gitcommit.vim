@@ -4,14 +4,14 @@
 " Filenames:	*.git/COMMIT_EDITMSG
 
 if exists("b:current_syntax")
-    finish
+  finish
 endif
 
 syn case match
 syn sync minlines=50
 
 if has("spell")
-    syn spell toplevel
+  syn spell toplevel
 endif
 
 syn include @gitcommitDiff syntax/diff.vim

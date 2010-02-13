@@ -4,7 +4,7 @@
 
 " Only do this when not done yet for this buffer
 if (exists("b:did_ftplugin"))
-    finish
+  finish
 endif
 
 runtime! ftplugin/git.vim
@@ -12,16 +12,16 @@ let b:did_ftplugin = 1
 
 setlocal comments=:# commentstring=#\ %s formatoptions-=t
 if !exists("b:undo_ftplugin")
-    let b:undo_ftplugin = ""
+  let b:undo_ftplugin = ""
 endif
 let b:undo_ftplugin = b:undo_ftplugin."|setl com< cms< fo<"
 
 function! s:choose(word)
-    s/^\(\w\+\>\)\=\(\s*\)\ze\x\{4,40\}\>/\=(strlen(submatch(1)) == 1 ? a:word[0] : a:word) . substitute(submatch(2),'^$',' ','')/e
+  s/^\(\w\+\>\)\=\(\s*\)\ze\x\{4,40\}\>/\=(strlen(submatch(1)) == 1 ? a:word[0] : a:word) . substitute(submatch(2),'^$',' ','')/e
 endfunction
 
 function! s:cycle()
-    call s:choose(get({'s':'edit','p':'squash','e':'reword'},getline('.')[0],'pick'))
+  call s:choose(get({'s':'edit','p':'squash','e':'reword'},getline('.')[0],'pick'))
 endfunction
 
 command! -buffer -bar Pick   :call s:choose('pick')
@@ -33,7 +33,7 @@ command! -buffer -bar Cycle  :call s:cycle()
 "nnoremap <buffer> <silent> S :Cycle<CR>
 
 if exists("g:no_plugin_maps") || exists("g:no_gitrebase_maps")
-    finish
+  finish
 endif
 
 nnoremap <buffer> <expr> K col('.') < 7 && expand('<Lt>cword>') =~ '\X' && getline('.') =~ '^\w\+\s\+\x\+\>' ? 'wK' : 'K'
