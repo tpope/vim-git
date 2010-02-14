@@ -21,13 +21,14 @@ function! s:choose(word)
 endfunction
 
 function! s:cycle()
-  call s:choose(get({'s':'edit','p':'squash','e':'reword'},getline('.')[0],'pick'))
+  call s:choose(get({'s':'edit','p':'squash','e':'reword','r':'fixup'},getline('.')[0],'pick'))
 endfunction
 
 command! -buffer -bar Pick   :call s:choose('pick')
 command! -buffer -bar Squash :call s:choose('squash')
 command! -buffer -bar Edit   :call s:choose('edit')
 command! -buffer -bar Reword :call s:choose('reword')
+command! -buffer -bar Fixup  :call s:choose('fixup')
 command! -buffer -bar Cycle  :call s:cycle()
 " The above are more useful when they are mapped; for example:
 "nnoremap <buffer> <silent> S :Cycle<CR>
