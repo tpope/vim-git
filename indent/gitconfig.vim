@@ -11,6 +11,8 @@ setlocal autoindent
 setlocal indentexpr=GetGitconfigIndent()
 setlocal indentkeys=o,O,*<Return>,0[,],0;,0#,=,!^F
 
+let b:undo_indent = 'setl ai< inde< indk<'
+
 " Only define the function once.
 if exists("*GetGitconfigIndent")
   finish
