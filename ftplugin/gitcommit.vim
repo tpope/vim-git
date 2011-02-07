@@ -28,7 +28,7 @@ if !exists("b:git_dir")
 endif
 
 " Automatically diffing can be done with:
-"   autocmd FileType gitcommit DiffGitCached | wincmd p
+"   autocmd BufRead *.git/COMMIT_EDITMSG DiffGitCached | wincmd p
 command! -bang -bar -buffer -complete=custom,s:diffcomplete -nargs=* DiffGitCached :call s:gitdiffcached(<bang>0,b:git_dir,<f-args>)
 
 function! s:diffcomplete(A,L,P)
