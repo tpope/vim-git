@@ -10,13 +10,14 @@ endif
 runtime! ftplugin/git.vim
 let b:did_ftplugin = 1
 
+set nomodeline
+
+let b:undo_ftplugin = 'setl modeline<'
+
 if &textwidth == 0
   " make sure that log messages play nice with git-log on standard terminals
   setlocal textwidth=72
-  if !exists("b:undo_ftplugin")
-    let b:undo_ftplugin = ""
-  endif
-  let b:undo_ftplugin = b:undo_ftplugin . "|setl tw<"
+  let b:undo_ftplugin .= "|setl tw<"
 endif
 
 if exists("g:no_gitcommit_commands") || v:version < 700
