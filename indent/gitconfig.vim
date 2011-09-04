@@ -10,6 +10,7 @@ let b:did_indent = 1
 setlocal autoindent
 setlocal indentexpr=GetGitconfigIndent()
 setlocal indentkeys=o,O,*<Return>,0[,],0;,0#,=,!^F
+setlocal noexpandtab
 
 let b:undo_indent = 'setl ai< inde< indk<'
 
@@ -23,13 +24,13 @@ function! GetGitconfigIndent()
   let cline = getline(v:lnum)
   if line =~  '\\\@<!\%(\\\\\)*\\$'
     " odd number of slashes, in a line continuation
-    return 2 * &sw
+    return 2 * &tabstop
   elseif cline =~ '^\s*\['
     return 0
   elseif cline =~ '^\s*\a'
-    return &sw
+    return &tabstop
   elseif cline == ''       && line =~ '^\['
-    return &sw
+    return &tabstop
   else
     return -1
   endif
