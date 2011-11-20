@@ -34,7 +34,7 @@ syn match   gitcommitNoChanges	"\%(^# \)\@<=No changes$" contained containedin=g
 syn region  gitcommitUntracked	start=/^# Untracked files:/ end=/^#$\|^#\@!/ contains=gitcommitHeader,gitcommitHead,gitcommitUntrackedFile fold
 syn match   gitcommitUntrackedFile  "\t\@<=.*"	contained
 
-syn region  gitcommitDiscarded	start=/^# Changed but not updated:/ end=/^#$\|^#\@!/ contains=gitcommitHeader,gitcommitHead,gitcommitDiscardedType fold
+syn region  gitcommitDiscarded	start=/^# Change\%(s not staged for commit\|d but not updated\):/ end=/^#$\|^#\@!/ contains=gitcommitHeader,gitcommitHead,gitcommitDiscardedType fold
 syn region  gitcommitSelected	start=/^# Changes to be committed:/ end=/^#$\|^#\@!/ contains=gitcommitHeader,gitcommitHead,gitcommitSelectedType fold
 syn region  gitcommitUnmerged	start=/^# Unmerged paths:/ end=/^#$\|^#\@!/ contains=gitcommitHeader,gitcommitHead,gitcommitUnmergedType fold
 
