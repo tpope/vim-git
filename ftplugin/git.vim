@@ -9,8 +9,8 @@ endif
 let b:did_ftplugin = 1
 
 if !exists('b:git_dir')
-  if expand('%:p') =~# '[\/]\.git[\/]modules[\/][^\/]'
-    let b:git_dir = matchstr(expand('%:p'),'.*[\/]\.git[\/]modules[\/][^\/]*')
+  if expand('%:p') =~# '[\/]\.git[\/]modules[\/]'
+    " Stay out of the way
   elseif expand('%:p') =~# '\.git\>'
     let b:git_dir = matchstr(expand('%:p'),'.*\.git\>')
   elseif $GIT_DIR != ''
