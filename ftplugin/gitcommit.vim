@@ -63,6 +63,6 @@ function! s:gitdiffcached(bang,gitdir,...)
   wincmd P
   let b:git_dir = a:gitdir
   command! -bang -bar -buffer -complete=custom,s:diffcomplete -nargs=* DiffGitCached :call s:gitdiffcached(<bang>0,b:git_dir,<f-args>)
-  nnoremap <silent> q :q<CR>
+  nnoremap <buffer> <silent> q :q<CR>
   setlocal buftype=nowrite nobuflisted noswapfile nomodifiable filetype=git
 endfunction
