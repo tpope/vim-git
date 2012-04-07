@@ -28,8 +28,6 @@ if !exists("b:git_dir")
   let b:git_dir = expand("%:p:h")
 endif
 
-" Automatically diffing can be done with:
-"   autocmd BufRead *.git/COMMIT_EDITMSG DiffGitCached | wincmd p
 command! -bang -bar -buffer -complete=custom,s:diffcomplete -nargs=* DiffGitCached :call s:gitdiffcached(<bang>0,b:git_dir,<f-args>)
 
 function! s:diffcomplete(A,L,P)
