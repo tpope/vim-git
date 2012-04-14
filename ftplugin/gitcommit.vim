@@ -10,7 +10,7 @@ endif
 runtime! ftplugin/git.vim
 let b:did_ftplugin = 1
 
-set nomodeline
+setlocal nomodeline
 
 let b:undo_ftplugin = 'setl modeline<'
 
