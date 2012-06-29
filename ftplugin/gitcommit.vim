@@ -11,7 +11,7 @@ endif
 runtime! ftplugin/git.vim
 let b:did_ftplugin = 1
 
-setlocal nomodeline formatoptions+=t
+setlocal nomodeline formatoptions-=croq formatoptions+=tl
 
 let b:undo_ftplugin = 'setl modeline< formatoptions<'
 
