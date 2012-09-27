@@ -31,6 +31,15 @@ endif
 
 command! -bang -bar -buffer -complete=custom,s:diffcomplete -nargs=* DiffGitCached :call s:gitdiffcached(<bang>0,b:git_dir,<f-args>)
 
+if exists("g:gitcommit_jump_to_top")
+    au BufEnter * call JumpToFirstLine()
+endif
+
+function! JumpToFirstLine()
+    " Always jump to first line, even if there was a saved cursor.
+    call setpos('.', [0, 1, 1, 0])
+endfunction
+
 function! s:diffcomplete(A,L,P)
   let args = ""
   if a:P <= match(a:L." -- "," -- ")+3
