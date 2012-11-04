@@ -1,5 +1,5 @@
 " Git
-autocmd BufNewFile,BufRead *.git/{modules/**/}{COMMIT_EDIT,MERGE_}MSG set ft=gitcommit
+autocmd BufNewFile,BufRead *.git/{,modules/**/}{COMMIT_EDIT,MERGE_}MSG set ft=gitcommit
 autocmd BufNewFile,BufRead *.git/config,.gitconfig,.gitmodules set ft=gitconfig
 autocmd BufNewFile,BufRead *.git/modules/**/config             set ft=gitconfig
 autocmd BufNewFile,BufRead git-rebase-todo                     set ft=gitrebase
