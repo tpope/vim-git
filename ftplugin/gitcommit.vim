@@ -20,6 +20,10 @@ if exists("g:no_gitcommit_commands") || v:version < 700
   finish
 endif
 
+if !exists("g:git_commit_window_height")
+  let g:git_commit_window_height = 15
+endif
+
 if !exists("b:git_dir")
   let b:git_dir = expand("%:p:h")
 endif
@@ -46,6 +50,7 @@ function! s:gitdiffcached(bang,gitdir,...)
   let tree = fnamemodify(a:gitdir,':h')
   let name = tempname()
   let git = "git"
+  let pheight = winheight('.') - g:git_commit_window_height
   if strpart(getcwd(),0,strlen(tree)) != tree
     let git .= " --git-dir=".(exists("*shellescape") ? shellescape(a:gitdir) : '"'.a:gitdir.'"')
   endif
@@ -55,6 +60,7 @@ function! s:gitdiffcached(bang,gitdir,...)
     let extra = "-p --stat=".&columns
   endif
   call system(git." diff --cached --no-color --no-ext-diff ".extra." > ".(exists("*shellescape") ? shellescape(name) : name))
+  exe "setlocal previewheight=" . pheight
   exe "pedit ".(exists("*fnameescape") ? fnameescape(name) : name)
   wincmd P
   let b:git_dir = a:gitdir
