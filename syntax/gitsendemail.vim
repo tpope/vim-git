@@ -9,11 +9,16 @@ if exists("b:current_syntax")
 endif
 
 runtime! syntax/mail.vim
+unlet b:current_syntax
+
 syn case match
 
 syn match   gitsendemailComment "\%^From.*#.*"
 syn match   gitsendemailComment "^GIT:.*"
 
 hi def link gitsendemailComment Comment
+
+syn include @gitsendemailDiff syntax/diff.vim
+syn region gitsendemailDiff start=/\%(^diff --\%(git\|cc\|combined\) \)\@=/ end=/^-- %/ fold contains=@gitsendemailDiff
 
 let b:current_syntax = "gitsendemail"
