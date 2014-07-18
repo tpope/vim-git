@@ -1,7 +1,7 @@
 " Vim syntax file
 " Language:	git send-email message
 " Maintainer:	Tim Pope
-" Filenames:	*.msg.[0-9]* (first line is "From ... # This line is ignored.")
+" Filenames:	.gitsendemail.*
 " Last Change:	2010 May 21
 
 if exists("b:current_syntax")
