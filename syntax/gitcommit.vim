@@ -40,25 +40,25 @@ syn       match   gitcommitOverflow	".*" contained contains=@Spell
 exec 'syn match   gitcommitBlank	"^[^' . s:comment_char . '].*" contained contains=@Spell'
 exec 'syn match   gitcommitComment	"^[' . s:comment_char . '].*"'
 exec 'syn match   gitcommitHead	"^\%([' . s:comment_char . ']   .*\n\)\+[' . s:comment_char . ']$" contained transparent'
-exec 'syn match   gitcommitOnBranch	"\%(^[' . s:comment_char . '] \)\@<=On branch" contained containedin=gitcommitComment nextgroup=gitcommitBranch skipwhite'
-exec 'syn match   gitcommitOnBranch	"\%(^[' . s:comment_char . '] \)\@<=Your branch .\{-\} ''" contained containedin=gitcommitComment nextgroup=gitcommitBranch skipwhite'
+exec 'syn match   gitcommitOnBranch	"^[' . s:comment_char . '] \zsOn branch" contained containedin=gitcommitComment nextgroup=gitcommitBranch skipwhite'
+exec 'syn match   gitcommitOnBranch	"^[' . s:comment_char . '] \zsYour branch .\{-\} ''" contained containedin=gitcommitComment nextgroup=gitcommitBranch skipwhite'
 syn       match   gitcommitBranch	"[^ ']\+" contained
-exec 'syn match   gitcommitNoBranch	"\%(^[' . s:comment_char . '] \)\@<=Not currently on any branch." contained containedin=gitcommitComment'
-exec 'syn match   gitcommitHeader	"\%(^[' . s:comment_char . '] \)\@<=.*:$"	contained containedin=gitcommitComment'
-exec 'syn region  gitcommitAuthor	matchgroup=gitCommitHeader start=/\%(^[' . s:comment_char . '] \)\@<=\%(Author\|Committer\):/ end=/$/ keepend oneline contained containedin=gitcommitComment transparent'
-exec 'syn match   gitcommitNoChanges	"\%(^[' . s:comment_char . '] \)\@<=No changes$" contained containedin=gitcommitComment'
+exec 'syn match   gitcommitNoBranch	"^[' . s:comment_char . '] \zsNot currently on any branch." contained containedin=gitcommitComment'
+exec 'syn match   gitcommitHeader	"^[' . s:comment_char . '] \zs.*:$"	contained containedin=gitcommitComment'
+exec 'syn region  gitcommitAuthor	matchgroup=gitCommitHeader start=/^[' . s:comment_char . '] \zs\%(Author\|Committer\):/ end=/$/ keepend oneline contained containedin=gitcommitComment transparent'
+exec 'syn match   gitcommitNoChanges	"^[' . s:comment_char . '] \zsNo changes$" contained containedin=gitcommitComment'
 
 exec 'syn region  gitcommitUntracked	start=/^[' . s:comment_char . '] Untracked files:/ end=/^[' . s:comment_char . ']$\|^[' . s:comment_char . ']\@!/ contains=gitcommitHeader,gitcommitHead,gitcommitUntrackedFile fold'
-syn       match   gitcommitUntrackedFile  "\t\@<=.*"	contained
+syn       match   gitcommitUntrackedFile  "\t\zs.*"	contained
 
 exec 'syn region  gitcommitDiscarded	start=/^[' . s:comment_char . '] Change\%(s not staged for commit\|d but not updated\):/ end=/^[' . s:comment_char . ']$\|^[' . s:comment_char . ']\@!/ contains=gitcommitHeader,gitcommitHead,gitcommitDiscardedType fold'
 exec 'syn region  gitcommitSelected	start=/^[' . s:comment_char . '] Changes to be committed:/ end=/^[' . s:comment_char . ']$\|^[' . s:comment_char . ']\@!/ contains=gitcommitHeader,gitcommitHead,gitcommitSelectedType fold'
 exec 'syn region  gitcommitUnmerged	start=/^[' . s:comment_char . '] Unmerged paths:/ end=/^[' . s:comment_char . ']$\|^[' . s:comment_char . ']\@!/ contains=gitcommitHeader,gitcommitHead,gitcommitUnmergedType fold'
 
 
-syn       match   gitcommitDiscardedType	"\t\@<=[[:lower:]][^:]*[[:lower:]]: "he=e-2	contained containedin=gitcommitComment nextgroup=gitcommitDiscardedFile skipwhite
-syn       match   gitcommitSelectedType	"\t\@<=[[:lower:]][^:]*[[:lower:]]: "he=e-2	contained containedin=gitcommitComment nextgroup=gitcommitSelectedFile skipwhite
-syn       match   gitcommitUnmergedType	"\t\@<=[[:lower:]][^:]*[[:lower:]]: "he=e-2	contained containedin=gitcommitComment nextgroup=gitcommitUnmergedFile skipwhite
+syn       match   gitcommitDiscardedType	"\t\zs[[:lower:]][^:]*[[:lower:]]: "he=e-2	contained containedin=gitcommitComment nextgroup=gitcommitDiscardedFile skipwhite
+syn       match   gitcommitSelectedType	"\t\zs[[:lower:]][^:]*[[:lower:]]: "he=e-2	contained containedin=gitcommitComment nextgroup=gitcommitSelectedFile skipwhite
+syn       match   gitcommitUnmergedType	"\t\zs[[:lower:]][^:]*[[:lower:]]: "he=e-2	contained containedin=gitcommitComment nextgroup=gitcommitUnmergedFile skipwhite
 syn       match   gitcommitDiscardedFile	".\{-\}\%($\| -> \)\@=" contained nextgroup=gitcommitDiscardedArrow
 syn       match   gitcommitSelectedFile	".\{-\}\%($\| -> \)\@=" contained nextgroup=gitcommitSelectedArrow
 syn       match   gitcommitUnmergedFile	".\{-\}\%($\| -> \)\@=" contained nextgroup=gitcommitSelectedArrow
