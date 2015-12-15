@@ -32,6 +32,7 @@ hi def link gitrebaseEdit           PreProc
 hi def link gitrebaseSquash         Type
 hi def link gitrebaseFixup          Special
 hi def link gitrebaseExec           Function
+hi def link gitrebaseDrop           Comment
 hi def link gitrebaseSummary        String
 hi def link gitrebaseComment        Comment
 hi def link gitrebaseSquashError    Error
