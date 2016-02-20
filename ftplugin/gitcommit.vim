@@ -11,7 +11,8 @@ endif
 runtime! ftplugin/git.vim
 let b:did_ftplugin = 1
 
-setlocal nomodeline tabstop=8 formatoptions-=croq formatoptions+=tl textwidth=72
+setlocal nomodeline tabstop=8 formatoptions+=tl textwidth=72
+setlocal formatoptions-=c formatoptions-=r formatoptions-=o formatoptions-=q
 let b:undo_ftplugin = 'setl modeline< tabstop< formatoptions< tw<'
 
 if exists("g:no_gitcommit_commands") || v:version < 700
