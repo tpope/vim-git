@@ -14,9 +14,6 @@ let b:did_ftplugin = 1
 setlocal comments=:# commentstring=#\ %s
 setlocal nomodeline tabstop=8 formatoptions+=tl textwidth=72
 setlocal formatoptions-=c formatoptions-=r formatoptions-=o formatoptions-=q
-if !exists("b:undo_ftplugin")
-  let b:undo_ftplugin = ""
-endif
 let b:undo_ftplugin = 'setl modeline< tabstop< formatoptions< tw< com< cms<'
 
 if exists("g:no_gitcommit_commands") || v:version < 700
