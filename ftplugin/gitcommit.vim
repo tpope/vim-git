@@ -11,9 +11,13 @@ endif
 runtime! ftplugin/git.vim
 let b:did_ftplugin = 1
 
+setlocal comments=:# commentstring=#\ %s
 setlocal nomodeline tabstop=8 formatoptions+=tl textwidth=72
 setlocal formatoptions-=c formatoptions-=r formatoptions-=o formatoptions-=q
-let b:undo_ftplugin = 'setl modeline< tabstop< formatoptions< tw<'
+if !exists("b:undo_ftplugin")
+  let b:undo_ftplugin = ""
+endif
+let b:undo_ftplugin = 'setl modeline< tabstop< formatoptions< tw< com< cms<'
 
 if exists("g:no_gitcommit_commands") || v:version < 700
   finish
@@ -24,6 +28,8 @@ if !exists("b:git_dir")
 endif
 
 command! -bang -bar -buffer -complete=custom,s:diffcomplete -nargs=* DiffGitCached :call s:gitdiffcached(<bang>0,b:git_dir,<f-args>)
+
+let b:undo_ftplugin = b:undo_ftplugin . "|delc DiffGitCached"
 
 function! s:diffcomplete(A,L,P)
   let args = ""
