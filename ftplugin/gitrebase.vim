@@ -31,6 +31,7 @@ command! -buffer -bar -range Squash :call s:choose('squash', <line1>, <line2>)
 command! -buffer -bar -range Edit   :call s:choose('edit', <line1>, <line2>)
 command! -buffer -bar -range Reword :call s:choose('reword', <line1>, <line2>)
 command! -buffer -bar -range Fixup  :call s:choose('fixup', <line1>, <line2>)
+command! -buffer -bar -range Drop   :call s:choose('drop', <line1>, <line2>)
 command! -buffer -bar Cycle  :call s:cycle()
 " The above are more useful when they are mapped; for example:
 "nnoremap <buffer> <silent> S :Cycle<CR>
