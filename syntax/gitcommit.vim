@@ -19,8 +19,10 @@ syn include @gitcommitDiff syntax/diff.vim
 syn region gitcommitDiff start=/\%(^diff --\%(git\|cc\|combined\) \)\@=/ end=/^\%(diff --\|$\|#\)\@=/ fold contains=@gitcommitDiff
 
 syn match   gitcommitFirstLine	"\%^[^#].*"  nextgroup=gitcommitBlank skipnl
-syn match   gitcommitSummary	"^.\{0,50\}" contained containedin=gitcommitFirstLine nextgroup=gitcommitOverflow contains=@Spell
-syn match   gitcommitOverflow	".*" contained contains=@Spell
+syn match   gitcommitSummary	"^.\{0,50\}" contained containedin=gitcommitFirstLine nextgroup=gitcommitOverflow contains=gitcommitInlineCodeContained,@Spell
+syn match   gitcommitOverflow	".*" contained contains=gitcommitInlineCodeContained,@Spell
+syn region  gitcommitInlineCode start="`" end="`" oneline contains=@NoSpell
+syn region  gitcommitInlineCodeContained start="`" end="`" contained transparent oneline contains=@NoSpell
 syn match   gitcommitBlank	"^[^#].*" contained contains=@Spell
 syn match   gitcommitComment	"^#.*"
 syn match   gitcommitHead	"^\%(#   .*\n\)\+#$" contained transparent
