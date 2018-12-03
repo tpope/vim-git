@@ -43,12 +43,15 @@ syn region  gitcommitUntracked	start=/^# Untracked files:/ end=/^#$\|^#\@!/ cont
 syn match   gitcommitUntrackedFile  "\t\@<=.*"	contained
 
 syn region  gitcommitDiscarded	start=/^# Change\%(s not staged for commit\|d but not updated\):/ end=/^#$\|^#\@!/ contains=gitcommitHeader,gitcommitHead,gitcommitDiscardedType fold
-syn region  gitcommitSelected	start=/^# Changes to be committed:/ end=/^#$\|^#\@!/ contains=gitcommitHeader,gitcommitHead,gitcommitSelectedType fold
+syn region  gitcommitSelected	start=/^# Changes to be committed:/ end=/^#$\|^#\@!/ contains=gitcommitHeader,gitcommitHead,gitcommitSelectedType,gitcommitSelectedTypeNew,gitcommitSelectedTypeMod,gitcommitSelectedTypeDel fold
 syn region  gitcommitUnmerged	start=/^# Unmerged paths:/ end=/^#$\|^#\@!/ contains=gitcommitHeader,gitcommitHead,gitcommitUnmergedType fold
 
 
 syn match   gitcommitDiscardedType	"\t\@<=[[:lower:]][^:]*[[:lower:]]: "he=e-2	contained containedin=gitcommitComment nextgroup=gitcommitDiscardedFile skipwhite
 syn match   gitcommitSelectedType	"\t\@<=[[:lower:]][^:]*[[:lower:]]: "he=e-2	contained containedin=gitcommitComment nextgroup=gitcommitSelectedFile skipwhite
+syn match   gitcommitSelectedTypeNew	"\t\@<=new[^:]*[[:lower:]]: "he=e-2	contained containedin=gitcommitComment nextgroup=gitcommitSelectedFile skipwhite
+syn match   gitcommitSelectedTypeMod	"\t\@<=mod[^:]*[[:lower:]]: "he=e-2	contained containedin=gitcommitComment nextgroup=gitcommitSelectedFile skipwhite
+syn match   gitcommitSelectedTypeDel	"\t\@<=del[^:]*[[:lower:]]: "he=e-2	contained containedin=gitcommitComment nextgroup=gitcommitSelectedFile skipwhite
 syn match   gitcommitUnmergedType	"\t\@<=[[:lower:]][^:]*[[:lower:]]: "he=e-2	contained containedin=gitcommitComment nextgroup=gitcommitUnmergedFile skipwhite
 syn match   gitcommitDiscardedFile	".\{-\}\%($\| -> \)\@=" contained nextgroup=gitcommitDiscardedArrow
 syn match   gitcommitSelectedFile	".\{-\}\%($\| -> \)\@=" contained nextgroup=gitcommitSelectedArrow
@@ -72,6 +75,9 @@ hi def link gitcommitBranch		Special
 hi def link gitcommitNoBranch		gitCommitBranch
 hi def link gitcommitDiscardedType	gitcommitType
 hi def link gitcommitSelectedType	gitcommitType
+hi def link gitcommitSelectedTypeNew	Identifier
+hi def link gitcommitSelectedTypeMod	Special
+hi def link gitcommitSelectedTypeDel	Constant
 hi def link gitcommitUnmergedType	gitcommitType
 hi def link gitcommitType		Type
 hi def link gitcommitNoChanges		gitcommitHeader
