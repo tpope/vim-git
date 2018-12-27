@@ -77,7 +77,7 @@ hi def link gitcommitDiscardedType	gitcommitType
 hi def link gitcommitSelectedType	gitcommitType
 hi def link gitcommitSelectedTypeNew	Identifier
 hi def link gitcommitSelectedTypeMod	Special
-hi def link gitcommitSelectedTypeDel	Constant
+hi def link gitcommitSelectedTypeDel	Statement
 hi def link gitcommitUnmergedType	gitcommitType
 hi def link gitcommitType		Type
 hi def link gitcommitNoChanges		gitcommitHeader
