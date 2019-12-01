@@ -30,6 +30,7 @@ else
   syn match gitcommitComment	"^#.*"
 endif
 
+syn match   gitcommitHash	"\<\x\{40,}\>" contains=@NoSpell display
 syn match   gitcommitHead	"^\%(#   .*\n\)\+#$" contained transparent
 syn match   gitcommitOnBranch	"\%(^# \)\@<=On branch" contained containedin=gitcommitComment nextgroup=gitcommitBranch skipwhite
 syn match   gitcommitOnBranch	"\%(^# \)\@<=Your branch .\{-\} '" contained containedin=gitcommitComment nextgroup=gitcommitBranch skipwhite
@@ -67,6 +68,7 @@ hi def link gitcommitUntracked		gitcommitComment
 hi def link gitcommitDiscarded		gitcommitComment
 hi def link gitcommitSelected		gitcommitComment
 hi def link gitcommitUnmerged		gitcommitComment
+hi def link gitcommitHash		Identifier
 hi def link gitcommitOnBranch		Comment
 hi def link gitcommitBranch		Special
 hi def link gitcommitNoBranch		gitCommitBranch
