@@ -2,7 +2,7 @@
 " Language:	git rebase --interactive
 " Maintainer:	Tim Pope <vimNOSPAM@tpope.org>
 " Filenames:	git-rebase-todo
-" Last Change:	2013 May 30
+" Last Change:	2016 Aug 29
 
 if exists("b:current_syntax")
   finish
