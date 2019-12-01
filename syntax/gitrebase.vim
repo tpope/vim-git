@@ -18,7 +18,7 @@ syn match   gitrebaseEdit   "\v^e%(dit)=>"   nextgroup=gitrebaseCommit skipwhite
 syn match   gitrebaseSquash "\v^s%(quash)=>" nextgroup=gitrebaseCommit skipwhite
 syn match   gitrebaseFixup  "\v^f%(ixup)=>"  nextgroup=gitrebaseCommit skipwhite
 syn match   gitrebaseExec   "\v^%(x|exec)>" nextgroup=gitrebaseCommand skipwhite
-syn match   gitrebaseBreak  "\v^b%(reak)=>"  nextgroup=gitrebaseCommit skipwhite
+syn match   gitrebaseBreak  "\v^b%(reak)=>"
 syn match   gitrebaseDrop   "\v^d%(rop)=>"   nextgroup=gitrebaseCommit skipwhite
 syn match   gitrebaseNoop   "\v^noop>"
 syn match   gitrebaseSummary ".*"               contains=gitrebaseHash contained
