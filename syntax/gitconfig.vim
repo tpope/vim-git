@@ -2,7 +2,7 @@
 " Language:	git config file
 " Maintainer:	Tim Pope <vimNOSPAM@tpope.org>
 " Filenames:	gitconfig, .gitconfig, *.git/config
-" Last Change:	2010 May 21
+" Last Change:	2019 Sep 27
 
 if exists("b:current_syntax")
   finish
@@ -11,7 +11,7 @@ endif
 syn case ignore
 syn sync minlines=10
 
-syn match   gitconfigComment	"[#;].*"
+syn match   gitconfigComment	"[#;].*" contains=@Spell
 syn match   gitconfigSection	"\%(^\s*\)\@<=\[[a-z0-9.-]\+\]"
 syn match   gitconfigSection	'\%(^\s*\)\@<=\[[a-z0-9.-]\+ \+\"\%([^\\"]\|\\.\)*"\]'
 syn match   gitconfigVariable	"\%(^\s*\)\@<=\a[a-z0-9-]*\%(\s*\%([=#;]\|$\)\)\@=" nextgroup=gitconfigAssignment skipwhite
