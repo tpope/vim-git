@@ -18,12 +18,15 @@ if !exists("b:undo_ftplugin")
 endif
 let b:undo_ftplugin = b:undo_ftplugin."|setl com< cms< fo< ml<"
 
-function! s:choose(word)
+function! s:choose(word) abort
   s/^\(\w\+\>\)\=\(\s*\)\ze\x\{4,40\}\>/\=(strlen(submatch(1)) == 1 ? a:word[0] : a:word) . substitute(submatch(2),'^$',' ','')/e
 endfunction
 
-function! s:cycle()
-  call s:choose(get({'s':'edit','p':'squash','e':'reword','r':'fixup'},getline('.')[0],'pick'))
+function! s:cycle(count) abort
+  let words = ['pick', 'edit', 'fixup', 'squash', 'reword']
+  let index = index(map(copy(words), 'v:val[0]'), getline('.')[0])
+  let index = ((index < 0 ? 0 : index) + 10000 + a:count) % len(words)
+  call s:choose(words[index])
 endfunction
 
 command! -buffer -bar -range Pick   :<line1>,<line2>call s:choose('pick')
@@ -32,14 +35,14 @@ command! -buffer -bar -range Edit   :<line1>,<line2>call s:choose('edit')
 command! -buffer -bar -range Reword :<line1>,<line2>call s:choose('reword')
 command! -buffer -bar -range Fixup  :<line1>,<line2>call s:choose('fixup')
 command! -buffer -bar -range Drop   :<line1>,<line2>call s:choose('drop')
-command! -buffer -bar Cycle  :call s:cycle()
-" The above are more useful when they are mapped; for example:
-"nnoremap <buffer> <silent> S :Cycle<CR>
+command! -buffer -count=1 -bar -bang Cycle call s:cycle(<bang>0 ? -<count> : <count>)
 
 if exists("g:no_plugin_maps") || exists("g:no_gitrebase_maps")
   finish
 endif
 
 nnoremap <buffer> <expr> K col('.') < 7 && expand('<Lt>cword>') =~ '\X' && getline('.') =~ '^\w\+\s\+\x\+\>' ? 'wK' : 'K'
+nnoremap <buffer> <silent> <C-A> :<C-U><C-R>=v:count1<CR>Cycle<CR>
+nnoremap <buffer> <silent> <C-X> :<C-U><C-R>=v:count1<CR>Cycle!<CR>
 
-let b:undo_ftplugin = b:undo_ftplugin . "|nunmap <buffer> K"
+let b:undo_ftplugin = b:undo_ftplugin . "|exe 'nunmap <buffer> K'|exe 'nunmap <buffer> <C-A>'|exe 'nunmap <buffer> <C-X>'"
