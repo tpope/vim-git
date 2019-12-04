@@ -10,8 +10,8 @@ endif
 
 syn case match
 
-syn match   gitrebaseHash   "\v<\x{7,40}>"                             contained
-syn match   gitrebaseCommit "\v<\x{7,40}>"  nextgroup=gitrebaseSummary skipwhite
+syn match   gitrebaseHash   "\v<\x{7,}>"                               contained
+syn match   gitrebaseCommit "\v<\x{7,}>"    nextgroup=gitrebaseSummary skipwhite
 syn match   gitrebasePick   "\v^p%(ick)=>"   nextgroup=gitrebaseCommit skipwhite
 syn match   gitrebaseReword "\v^r%(eword)=>" nextgroup=gitrebaseCommit skipwhite
 syn match   gitrebaseEdit   "\v^e%(dit)=>"   nextgroup=gitrebaseCommit skipwhite
