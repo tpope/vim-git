@@ -23,9 +23,9 @@ function! s:choose(word) abort
 endfunction
 
 function! s:cycle(count) abort
-  let words = ['pick', 'edit', 'fixup', 'squash', 'reword']
+  let words = ['pick', 'edit', 'fixup', 'squash', 'reword', 'drop']
   let index = index(map(copy(words), 'v:val[0]'), getline('.')[0])
-  let index = ((index < 0 ? 0 : index) + 10000 + a:count) % len(words)
+  let index = ((index < 0 ? 0 : index) + 10000 * len(words) + a:count) % len(words)
   call s:choose(words[index])
 endfunction
 
