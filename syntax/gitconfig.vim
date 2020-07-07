@@ -2,7 +2,7 @@
 " Language:	git config file
 " Maintainer:	Tim Pope <vimNOSPAM@tpope.org>
 " Filenames:	gitconfig, .gitconfig, *.git/config
-" Last Change:	2019 Sep 27
+" Last Change:	2019 Dec 05
 
 if exists("b:current_syntax")
   finish
