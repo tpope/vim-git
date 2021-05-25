@@ -22,6 +22,9 @@ syn match   gitcommitSummary	"^.*\%<51v." contained containedin=gitcommitFirstLi
 syn match   gitcommitOverflow	".*" contained contains=@Spell
 syn match   gitcommitBlank	"^[^#].*" contained contains=@Spell
 
+syn match   gitcommitTrailers	"\n\@<=\n\%([[:alnum:]-]\+\s*:.*\|(cherry picked from commit .*\)\%(\n\s.*\|\n[[:alnum:]-]\+\s*:.*\|\n(cherry picked from commit .*\)*\%(\n\n*#\|\n*\%$\)\@="
+syn match   gitcommitTrailerToken "^[[:alnum:]-]\+\s*:" contained containedin=gitcommitTrailers
+
 if get(g:, "gitcommit_cleanup") is# "scissors"
   syn match gitcommitFirstLine	"\%^.*" nextgroup=gitcommitBlank skipnl
   syn region gitcommitComment start=/^# -\+ >8 -\+$/ end=/\%$/ contains=gitcommitDiff
@@ -63,6 +66,7 @@ syn match   gitcommitWarning		"^[^#].*: needs merge$" nextgroup=gitcommitWarning
 syn match   gitcommitWarning		"^\%(no changes added to commit\|nothing \%(added \)\=to commit\)\>.*\%$"
 
 hi def link gitcommitSummary		Keyword
+hi def link gitcommitTrailerToken	Label
 hi def link gitcommitComment		Comment
 hi def link gitcommitUntracked		gitcommitComment
 hi def link gitcommitDiscarded		gitcommitComment
