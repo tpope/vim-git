@@ -22,7 +22,7 @@ syn match   gitcommitSummary	"^.*\%<51v." contained containedin=gitcommitFirstLi
 syn match   gitcommitOverflow	".*" contained contains=@Spell
 syn match   gitcommitBlank	"^[^#].*" contained contains=@Spell
 
-if get(g:, "gitcommit_cleanup") is# "scissors"
+if get(b:, "gitcommit_cleanup", get(g:, "gitcommit_cleanup", "")) is# "scissors"
   syn match gitcommitFirstLine	"\%^.*" nextgroup=gitcommitBlank skipnl
   syn region gitcommitComment start=/^# -\+ >8 -\+$/ end=/\%$/ contains=gitcommitDiff
 else
