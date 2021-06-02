@@ -33,7 +33,7 @@ syn match  gitKeyword /^\%(object\|type\|tag\|commit\|tree\|parent\|encoding\|su
 syn match  gitKeyword /^\%(tag\>\|ref:\)/ contained containedin=gitHead nextgroup=gitReference skipwhite contains=@NoSpell
 syn match  gitKeyword /^Merge:/  contained containedin=gitHead nextgroup=gitHashAbbrev skipwhite contains=@NoSpell
 syn match  gitMode    /^\d\{6\}\>/ contained containedin=gitHead nextgroup=gitType,gitHash skipwhite
-syn match  gitIdentityKeyword /^\%(author\|committer\|tagger\)\%(-mail\|-time\|-tz\)\=\>/ contained containedin=gitHead nextgroup=gitIdentity skipwhite
+syn match  gitIdentityKeyword /^\%(author\|committer\|tagger\)\%(-mail\|-time\|-tz\)\=\>/ contained containedin=gitHead nextgroup=gitIdentity skipwhite contains=@NoSpell
 syn match  gitIdentityHeader /^\%(Author\|Commit\|Tagger\):/ contained containedin=gitHead nextgroup=gitIdentity skipwhite
 syn match  gitDateHeader /^\%(AuthorDate\|CommitDate\|Date\):/ contained containedin=gitHead nextgroup=gitDate skipwhite
 
@@ -52,8 +52,8 @@ syn match  gitHash      /^\<\x\{40\}\>/ containedin=gitHead contained nextgroup=
 syn match  gitHashAbbrev /\<\x\{4,40\}\>/           contained nextgroup=gitHashAbbrev skipwhite contains=@NoSpell
 syn match  gitHashAbbrev /\<\x\{4,39\}\.\.\./he=e-3 contained nextgroup=gitHashAbbrev skipwhite contains=@NoSpell
 
-syn match  gitIdentity /\S.\{-\} <[^>]*>/ contained nextgroup=gitDate skipwhite
-syn region gitEmail matchgroup=gitEmailDelimiter start=/</ end=/>/ keepend oneline contained containedin=gitIdentity
+syn match  gitIdentity /\S.\{-\} <[^>]*>/ contained nextgroup=gitDate skipwhite contains=@NoSpell
+syn region gitEmail matchgroup=gitEmailDelimiter start=/</ end=/>/ keepend oneline contained containedin=gitIdentity contains=@NoSpell
 
 syn match  gitNotesHeader /^Notes:\ze\n    /
 
