@@ -2,7 +2,7 @@
 " Language:	git commit file
 " Maintainer:	Tim Pope <vimNOSPAM@tpope.org>
 " Filenames:	*.git/COMMIT_EDITMSG
-" Last Change:	2013 May 30
+" Last Change:	2019 Dec 05
 
 if exists("b:current_syntax")
   finish
@@ -10,6 +10,7 @@ endif
 
 syn case match
 syn sync minlines=50
+syn sync linebreaks=1
 
 if has("spell")
   syn spell toplevel
@@ -18,11 +19,14 @@ endif
 syn include @gitcommitDiff syntax/diff.vim
 syn region gitcommitDiff start=/\%(^diff --\%(git\|cc\|combined\) \)\@=/ end=/^\%(diff --\|$\|#\)\@=/ fold contains=@gitcommitDiff
 
-syn match   gitcommitSummary	".*\%<50v" contained containedin=gitcommitFirstLine nextgroup=gitcommitOverflow contains=@Spell
+syn match   gitcommitSummary	"^.*\%<51v." contained containedin=gitcommitFirstLine nextgroup=gitcommitOverflow contains=@Spell
 syn match   gitcommitOverflow	".*" contained contains=@Spell
 syn match   gitcommitBlank	"^[^#].*" contained contains=@Spell
 
-if get(g:, "gitcommit_cleanup") is# "scissors"
+syn match   gitcommitTrailers	"\n\@<=\n\%([[:alnum:]-]\+\s*:.*\|(cherry picked from commit .*\)\%(\n\s.*\|\n[[:alnum:]-]\+\s*:.*\|\n(cherry picked from commit .*\)*\%(\n\n*#\|\n*\%$\)\@="
+syn match   gitcommitTrailerToken "^[[:alnum:]-]\+\s*:" contained containedin=gitcommitTrailers
+
+if get(b:, "gitcommit_cleanup", get(g:, "gitcommit_cleanup", "")) is# "scissors"
   syn match gitcommitFirstLine	"\%^.*" nextgroup=gitcommitBlank skipnl
   syn region gitcommitComment start=/^# -\+ >8 -\+$/ end=/\%$/ contains=gitcommitDiff
 else
@@ -30,6 +34,7 @@ else
   syn match gitcommitComment	"^#.*"
 endif
 
+syn match   gitcommitHash	"\<\x\{40,}\>" contains=@NoSpell display
 syn match   gitcommitHead	"^\%(#   .*\n\)\+#$" contained transparent
 syn match   gitcommitOnBranch	"\%(^# \)\@<=On branch" contained containedin=gitcommitComment nextgroup=gitcommitBranch skipwhite
 syn match   gitcommitOnBranch	"\%(^# \)\@<=Your branch .\{-\} '" contained containedin=gitcommitComment nextgroup=gitcommitBranch skipwhite
@@ -62,11 +67,13 @@ syn match   gitcommitWarning		"^[^#].*: needs merge$" nextgroup=gitcommitWarning
 syn match   gitcommitWarning		"^\%(no changes added to commit\|nothing \%(added \)\=to commit\)\>.*\%$"
 
 hi def link gitcommitSummary		Keyword
+hi def link gitcommitTrailerToken	Label
 hi def link gitcommitComment		Comment
 hi def link gitcommitUntracked		gitcommitComment
 hi def link gitcommitDiscarded		gitcommitComment
 hi def link gitcommitSelected		gitcommitComment
 hi def link gitcommitUnmerged		gitcommitComment
+hi def link gitcommitHash		Identifier
 hi def link gitcommitOnBranch		Comment
 hi def link gitcommitBranch		Special
 hi def link gitcommitNoBranch		gitCommitBranch

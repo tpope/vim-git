@@ -1,7 +1,7 @@
 " Vim indent file
 " Language:	git config file
 " Maintainer:	Tim Pope <vimNOSPAM@tpope.org>
-" Last Change:	2013 May 30
+" Last Change:	2017 Jun 13
 
 if exists("b:did_indent")
   finish
@@ -20,7 +20,7 @@ if exists("*GetGitconfigIndent")
 endif
 
 function! GetGitconfigIndent()
-  let sw    = exists('*shiftwidth') ? shiftwidth() : &sw
+  let sw    = shiftwidth()
   let line  = getline(prevnonblank(v:lnum-1))
   let cline = getline(v:lnum)
   if line =~  '\\\@<!\%(\\\\\)*\\$'
