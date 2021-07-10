@@ -12,10 +12,10 @@ autocmd BufNewFile,BufRead *.git/**
 
 " This logic really belongs in scripts.vim
 autocmd BufNewFile,BufRead,StdinReadPost *
-      \ if getline(1) =~ '^\(commit\|tree\|object\) \x\{40\}\>\|^tag \S\+$' |
+      \ if empty(&filetype) && getline(1) =~# '^\(commit\|tree\|object\) \x\{40\}\>\|^tag \S\+$' |
       \   set ft=git |
       \ endif
 autocmd BufNewFile,BufRead *
-      \ if getline(1) =~ '^From \x\{40\} Mon Sep 17 00:00:00 2001$' |
+      \ if getline(1) =~# '^From \x\{40\} Mon Sep 17 00:00:00 2001$' |
       \   set filetype=gitsendemail |
       \ endif
