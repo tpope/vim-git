@@ -14,6 +14,8 @@ syn include @gitDiff syntax/diff.vim
 
 syn region gitHead start=/\%^\%(tag \|tree \|object \)\@=/ end=/^$/ contains=@NoSpell
 syn region gitHead start=/\%(^commit\%( \x\{4,\}\)\{1,\}\%(\s*(.*)\)\=$\)\@=/ end=/^$/ contains=@NoSpell
+" git log --graph
+syn region gitGraph start=/\%(^[|\/\\_ ]*\*[|\/\\_ ]\{-\} commit\%( \x\{4,\}\)\{1,\}\%(\s*(.*)\)\=$\)\@=/ end=/^\%([|\/\\_ ]*$\)\@=/ contains=@NoSpell
 " git blame --porcelain
 syn region gitHead start=/\%(^\x\{40,\} \d\+ \d\+\%( \d\+\)\=$\)\@=/ end=/^\t\@=/ contains=@NoSpell
 " git ls-tree
@@ -42,6 +44,13 @@ syn match  gitKeyword /^Merge:/  contained containedin=gitHead nextgroup=gitHash
 syn match  gitIdentityKeyword /^\%(author\|committer\|tagger\) \@=/ contained containedin=gitHead nextgroup=gitIdentity skipwhite
 syn match  gitIdentityHeader /^\%(Author\|Commit\|Tagger\):/ contained containedin=gitHead nextgroup=gitIdentity skipwhite
 syn match  gitDateHeader /^\%(AuthorDate\|CommitDate\|Date\):/ contained containedin=gitHead nextgroup=gitDate skipwhite
+
+syn match  gitKeyword /^[*|\/\\_ ]\+\zscommit \@=/ contained containedin=gitGraph nextgroup=gitHashAbbrev skipwhite contains=@NoSpell
+syn match  gitKeyword /^[|\/\\_ ]\+\zs\%(object\|tree\|parent\|encoding\|gpgsig\%(-\w\+\)\=\|previous\) \@=/ contained containedin=gitGraph nextgroup=gitHash skipwhite contains=@NoSpell
+syn match  gitKeyword /^[|\/\\_ ]\+\zsMerge:/  contained containedin=gitGraph nextgroup=gitHashAbbrev skipwhite contains=@NoSpell
+syn match  gitIdentityKeyword /^[|\/\\_ ]\+\zs\%(author\|committer\|tagger\) \@=/ contained containedin=gitGraph nextgroup=gitIdentity skipwhite
+syn match  gitIdentityHeader /^[|\/\\_ ]\+\zs\%(Author\|Commit\|Tagger\):/ contained containedin=gitGraph nextgroup=gitIdentity skipwhite
+syn match  gitDateHeader /^[|\/\\_ ]\+\zs\%(AuthorDate\|CommitDate\|Date\):/ contained containedin=gitGraph nextgroup=gitDate skipwhite
 
 syn match  gitKeyword /^type \@=/ contained containedin=gitHead nextgroup=gitType skipwhite contains=@NoSpell
 syn match  gitKeyword /^\%(summary\|boundary\|filename\|\%(author\|committer\)-\%(time\|tz\)\) \@=/ contained containedin=gitHead skipwhite contains=@NoSpell
