@@ -12,7 +12,7 @@ syn sync minlines=50
 
 syn include @gitDiff syntax/diff.vim
 
-syn region gitHead start=/\%^\%(tag \|tree \|object $\)\@=/ end=/^$/ contains=@NoSpell
+syn region gitHead start=/\%^\%(tag \|tree \|object \)\@=/ end=/^$/ contains=@NoSpell
 syn region gitHead start=/\%(^commit\%( \x\{4,\}\)\{1,\}\%(\s*(.*)\)\=$\)\@=/ end=/^$/ contains=@NoSpell
 " git blame --porcelain
 syn region gitHead start=/\%(^\x\{40,\} \d\+ \d\+\%( \d\+\)\=$\)\@=/ end=/^\t\@=/ contains=@NoSpell
