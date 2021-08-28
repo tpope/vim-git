@@ -12,6 +12,13 @@ syn sync minlines=50
 
 syn include @gitDiff syntax/diff.vim
 
+" git log --oneline
+" minimize false positives by verifying contents of buffer
+if getline(1) =~# '^\x\{7,\} ' && getline('$') =~# '^\x\{7,\} '
+  syn match gitHashAbbrev /^\x\{7,\} \@=/ contains=@NoSpell
+elseif getline(1) =~#     '^[|\/\\_ ]\{-\}\*[|\/\\_ ]\{-\} \x\{7,\} '
+  syn match gitHashAbbrev /^[|\/\\_ ]\{-\}\*[|\/\\_ ]\{-\} \zs\x\{7,\} \@=/ contains=@NoSpell
+endif
 syn region gitHead start=/\%^\%(tag \|tree \|object $\)\@=/ end=/^$/ contains=@NoSpell
 syn region gitHead start=/\%(^commit\%( \x\{4,\}\)\{1,\}\%(\s*(.*)\)\=$\)\@=/ end=/^$/ contains=@NoSpell
 " git log --graph
