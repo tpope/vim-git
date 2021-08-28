@@ -14,6 +14,13 @@ syn include @gitDiff syntax/diff.vim
 
 syn region gitHead start=/\%^\%(tag \|tree \|object \)\@=/ end=/^$/ contains=@NoSpell
 syn region gitHead start=/\%(^commit\%( \x\{4,\}\)\{1,\}\%(\s*(.*)\)\=$\)\@=/ end=/^$/ contains=@NoSpell
+" git log --oneline
+" minimize false positives by verifying contents of buffer
+if getline(1) =~# '^\x\{7,\} ' && getline('$') =~# '^\x\{7,\} '
+  syn match gitHashAbbrev /^\x\{7,\} \@=/ contains=@NoSpell
+elseif getline(1) =~#     '^[|\/\\_ ]\{-\}\*[|\/\\_ ]\{-\} \x\{7,\} '
+  syn match gitHashAbbrev /^[|\/\\_ ]\{-\}\*[|\/\\_ ]\{-\} \zs\x\{7,\} \@=/ contains=@NoSpell
+endif
 " git log --graph
 syn region gitGraph start=/\%(^[|\/\\_ ]*\*[|\/\\_ ]\{-\} commit\%( \x\{4,\}\)\{1,\}\%(\s*(.*)\)\=$\)\@=/ end=/^\%([|\/\\_ ]*$\)\@=/ contains=@NoSpell
 " git blame --porcelain
