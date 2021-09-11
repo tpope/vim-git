@@ -48,6 +48,5 @@ function! s:gitdiffcached(bang, ...) abort
   exe "pedit " . fnameescape(name)
   wincmd P
   command! -bang -bar -buffer -complete=custom,s:diffcomplete -nargs=* DiffGitCached :call s:gitdiffcached(<bang>0, <f-args>)
-  nnoremap <buffer> <silent> q :q<CR>
   setlocal buftype=nowrite nobuflisted noswapfile nomodifiable filetype=git
 endfunction
