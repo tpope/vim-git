@@ -1,12 +1,18 @@
+function! s:Setf(filetype) abort
+  if &filetype !~# '\<'.a:filetype.'\>'
+    let &filetype = a:filetype
+  endif
+endfunction
+
 " Git
-autocmd BufNewFile,BufRead *.git/{,modules/**/,worktrees/*/}{COMMIT_EDIT,TAG_EDIT,MERGE_,}MSG set ft=gitcommit
-autocmd BufNewFile,BufRead *.git/config,.gitconfig,gitconfig,.gitmodules set ft=gitconfig
-autocmd BufNewFile,BufRead */.config/git/config                          set ft=gitconfig
-autocmd BufNewFile,BufRead *.git/modules/**/config                       set ft=gitconfig
-autocmd BufNewFile,BufRead git-rebase-todo                               set ft=gitrebase
-autocmd BufNewFile,BufRead .gitsendemail.*                               set ft=gitsendemail
+autocmd BufNewFile,BufRead *.git/{,modules/**/,worktrees/*/}{COMMIT_EDIT,TAG_EDIT,MERGE_,}MSG call s:Setf('gitcommit')
+autocmd BufNewFile,BufRead *.git/config,.gitconfig,gitconfig,.gitmodules call s:Setf('gitconfig')
+autocmd BufNewFile,BufRead */.config/git/config                          call s:Setf('gitconfig')
+autocmd BufNewFile,BufRead *.git/modules/**/config                       call s:Setf('gitconfig')
+autocmd BufNewFile,BufRead git-rebase-todo                               call s:Setf('gitrebase')
+autocmd BufNewFile,BufRead .gitsendemail.*                               call s:Setf('gitsendemail')
 autocmd BufNewFile,BufRead *.git/**
-      \ if getline(1) =~ '^\x\{40,\}\>\|^ref: ' |
+      \ if  empty(&filetype) && getline(1) =~# '^\x\{40,\}\>\|^ref: ' |
       \   set ft=git |
       \ endif
 
@@ -17,5 +23,5 @@ autocmd BufNewFile,BufRead,StdinReadPost *
       \ endif
 autocmd BufNewFile,BufRead *
       \ if getline(1) =~# '^From \x\{40,\} Mon Sep 17 00:00:00 2001$' |
-      \   set filetype=gitsendemail |
+      \   call s:Setf('gitsendemail') |
       \ endif
