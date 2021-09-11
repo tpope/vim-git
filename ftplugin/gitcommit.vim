@@ -11,12 +11,13 @@ endif
 let b:did_ftplugin = 1
 
 setlocal comments=:# commentstring=#\ %s
-setlocal include=^\+\+\+
 setlocal nomodeline tabstop=8 formatoptions+=tl textwidth=72
 setlocal formatoptions-=c formatoptions-=r formatoptions-=o formatoptions-=q formatoptions+=n
 setlocal formatlistpat+=\\\|^\\s*[-*+]\\s\\+
+setlocal include=^+++
+setlocal includeexpr=substitute(v:fname,'^[bi]/','','')
 
-let b:undo_ftplugin = 'setl modeline< tabstop< formatoptions< tw< com< cms< formatlistpat<'
+let b:undo_ftplugin = 'setl modeline< tabstop< formatoptions< tw< com< cms< formatlistpat< inc< inex<'
 
 if exists("g:no_gitcommit_commands")
   finish
