@@ -8,7 +8,6 @@ if (exists("b:did_ftplugin"))
   finish
 endif
 
-runtime! ftplugin/git.vim
 let b:did_ftplugin = 1
 
 setlocal comments=:# commentstring=#\ %s

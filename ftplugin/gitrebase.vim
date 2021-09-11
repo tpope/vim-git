@@ -8,7 +8,6 @@ if (exists("b:did_ftplugin"))
   finish
 endif
 
-runtime! ftplugin/git.vim
 let b:did_ftplugin = 1
 
 setlocal comments=:# commentstring=#\ %s formatoptions-=t
@@ -41,8 +40,7 @@ if exists("g:no_plugin_maps") || exists("g:no_gitrebase_maps")
   finish
 endif
 
-nnoremap <buffer> <expr> K col('.') < 7 && expand('<Lt>cword>') =~ '\X' && getline('.') =~ '^\w\+\s\+\x\+\>' ? 'wK' : 'K'
 nnoremap <buffer> <silent> <C-A> :<C-U><C-R>=v:count1<CR>Cycle<CR>
 nnoremap <buffer> <silent> <C-X> :<C-U><C-R>=v:count1<CR>Cycle!<CR>
 
-let b:undo_ftplugin = b:undo_ftplugin . "|exe 'nunmap <buffer> K'|exe 'nunmap <buffer> <C-A>'|exe 'nunmap <buffer> <C-X>'"
+let b:undo_ftplugin = b:undo_ftplugin . "|exe 'nunmap <buffer> <C-A>'|exe 'nunmap <buffer> <C-X>'"
