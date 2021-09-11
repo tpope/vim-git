@@ -18,7 +18,7 @@ setlocal formatlistpat+=\\\|^\\s*[-*+]\\s\\+
 
 let b:undo_ftplugin = 'setl modeline< tabstop< formatoptions< tw< com< cms< formatlistpat<'
 
-if exists("g:no_gitcommit_commands") || v:version < 700
+if exists("g:no_gitcommit_commands")
   finish
 endif
 
