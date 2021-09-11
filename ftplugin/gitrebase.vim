@@ -12,10 +12,7 @@ let b:did_ftplugin = 1
 
 setlocal comments=:# commentstring=#\ %s formatoptions-=t
 setlocal nomodeline
-if !exists("b:undo_ftplugin")
-  let b:undo_ftplugin = ""
-endif
-let b:undo_ftplugin = b:undo_ftplugin."|setl com< cms< fo< ml<"
+let b:undo_ftplugin = "setl com< cms< fo< ml<"
 
 function! s:choose(word) abort
   s/^\(\w\+\>\)\=\(\s*\)\ze\x\{4,40\}\>/\=(strlen(submatch(1)) == 1 ? a:word[0] : a:word) . substitute(submatch(2),'^$',' ','')/e
