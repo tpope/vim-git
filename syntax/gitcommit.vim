@@ -36,13 +36,13 @@ endif
 
 syn match   gitcommitHash	"\<\x\{40,}\>" contains=@NoSpell display
 syn match   gitcommitHead	"^\%(#   .*\n\)\+#$" contained transparent
-syn match   gitcommitOnBranch	"\%(^# \)\@<=On branch" contained containedin=gitcommitComment nextgroup=gitcommitBranch skipwhite
-syn match   gitcommitOnBranch	"\%(^# \)\@<=Your branch .\{-\} '" contained containedin=gitcommitComment nextgroup=gitcommitBranch skipwhite
+syn match   gitcommitOnBranch	"\%(^. \)\@<=On branch" contained containedin=gitcommitComment nextgroup=gitcommitBranch skipwhite
+syn match   gitcommitOnBranch	"\%(^. \)\@<=Your branch .\{-\} '" contained containedin=gitcommitComment nextgroup=gitcommitBranch skipwhite
 syn match   gitcommitBranch	"[^ ']\+" contained
-syn match   gitcommitNoBranch	"\%(^# \)\@<=Not currently on any branch." contained containedin=gitcommitComment
-syn match   gitcommitHeader	"\%(^# \)\@<=.*:$"	contained containedin=gitcommitComment
-syn region  gitcommitAuthor	matchgroup=gitCommitHeader start=/\%(^# \)\@<=\%(Author\|Committer\|Date\):/ end=/$/ keepend oneline contained containedin=gitcommitComment transparent
-syn match   gitcommitNoChanges	"\%(^# \)\@<=No changes$" contained containedin=gitcommitComment
+syn match   gitcommitNoBranch	"\%(^. \)\@<=Not currently on any branch." contained containedin=gitcommitComment
+syn match   gitcommitHeader	"\%(^. \)\@<=\S.*:$"	contained containedin=gitcommitComment
+syn region  gitcommitAuthor	matchgroup=gitCommitHeader start=/\%(^. \)\@<=\%(Author\|Committer\|Date\):/ end=/$/ keepend oneline contained containedin=gitcommitComment transparent
+syn match   gitcommitNoChanges	"\%(^. \)\@<=No changes$" contained containedin=gitcommitComment
 
 syn region  gitcommitUntracked	start=/^# Untracked files:/ end=/^#$\|^#\@!/ contains=gitcommitHeader,gitcommitHead,gitcommitUntrackedFile fold
 syn match   gitcommitUntrackedFile  "\t\@<=.*"	contained
