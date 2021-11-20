@@ -35,7 +35,6 @@ else
 endif
 
 syn match   gitcommitHash	"\<\x\{40,}\>" contains=@NoSpell display
-syn match   gitcommitHead	"^\%(#   .*\n\)\+#$" contained transparent
 syn match   gitcommitOnBranch	"\%(^. \)\@<=On branch" contained containedin=gitcommitComment nextgroup=gitcommitBranch skipwhite
 syn match   gitcommitOnBranch	"\%(^. \)\@<=Your branch .\{-\} '" contained containedin=gitcommitComment nextgroup=gitcommitBranch skipwhite
 syn match   gitcommitBranch	"[^ ']\+" contained
@@ -44,13 +43,12 @@ syn match   gitcommitHeader	"\%(^. \)\@<=\S.*:$"	contained containedin=gitcommit
 syn region  gitcommitAuthor	matchgroup=gitCommitHeader start=/\%(^. \)\@<=\%(Author\|Committer\|Date\):/ end=/$/ keepend oneline contained containedin=gitcommitComment transparent
 syn match   gitcommitNoChanges	"\%(^. \)\@<=No changes$" contained containedin=gitcommitComment
 
-syn region  gitcommitUntracked	start=/^# Untracked files:/ end=/^#$\|^#\@!/ contains=gitcommitHeader,gitcommitHead,gitcommitUntrackedFile fold
+syn region  gitcommitUntracked	start=/^# Untracked files:/ end=/^#$\|^#\@!/ contains=gitcommitHeader,gitcommitUntrackedFile fold
 syn match   gitcommitUntrackedFile  "\t\@<=.*"	contained
 
-syn region  gitcommitDiscarded	start=/^# Change\%(s not staged for commit\|d but not updated\):/ end=/^#$\|^#\@!/ contains=gitcommitHeader,gitcommitHead,gitcommitDiscardedType fold
-syn region  gitcommitSelected	start=/^# Changes to be committed:/ end=/^#$\|^#\@!/ contains=gitcommitHeader,gitcommitHead,gitcommitSelectedType fold
-syn region  gitcommitUnmerged	start=/^# Unmerged paths:/ end=/^#$\|^#\@!/ contains=gitcommitHeader,gitcommitHead,gitcommitUnmergedType fold
-
+syn region  gitcommitDiscarded	start=/^# Change\%(s not staged for commit\|d but not updated\):/ end=/^#$\|^#\@!/ contains=gitcommitHeader,gitcommitDiscardedType fold
+syn region  gitcommitSelected	start=/^# Changes to be committed:/ end=/^#$\|^#\@!/ contains=gitcommitHeader,gitcommitSelectedType fold
+syn region  gitcommitUnmerged	start=/^# Unmerged paths:/ end=/^#$\|^#\@!/ contains=gitcommitHeader,gitcommitUnmergedType fold
 
 syn match   gitcommitDiscardedType	"\t\@<=[[:lower:]][^:]*[[:lower:]]: "he=e-2	contained containedin=gitcommitComment nextgroup=gitcommitDiscardedFile skipwhite
 syn match   gitcommitSelectedType	"\t\@<=[[:lower:]][^:]*[[:lower:]]: "he=e-2	contained containedin=gitcommitComment nextgroup=gitcommitSelectedFile skipwhite
