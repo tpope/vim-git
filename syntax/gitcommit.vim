@@ -23,18 +23,19 @@ syn region gitcommitDiff start=/\%(^diff --\%(git\|cc\|combined\) \)\@=/ end=/^\
 
 syn match   gitcommitSummary	"^.*\%<51v." contained containedin=gitcommitFirstLine nextgroup=gitcommitOverflow contains=@Spell
 syn match   gitcommitOverflow	".*" contained contains=@Spell
-syn match   gitcommitBlank	"^[^#].*" contained contains=@Spell
-
-syn match   gitcommitTrailers	"\n\@<=\n\%([[:alnum:]-]\+\s*:.*\|(cherry picked from commit .*\)\%(\n\s.*\|\n[[:alnum:]-]\+\s*:.*\|\n(cherry picked from commit .*\)*\%(\n\n*#\|\n*\%$\)\@="
-syn match   gitcommitTrailerToken "^[[:alnum:]-]\+\s*:" contained containedin=gitcommitTrailers
+syn match   gitcommitBlank	"^.\+" contained contains=@Spell
+syn match   gitcommitFirstLine	"\%^.*" nextgroup=gitcommitBlank,gitcommitComment skipnl
 
 if get(b:, "gitcommit_cleanup", get(g:, "gitcommit_cleanup", "")) is# "scissors"
-  syn match gitcommitFirstLine	"\%^.*" nextgroup=gitcommitBlank skipnl
-  syn region gitcommitComment start=/^# -\+ >8 -\+$/ end=/\%$/ contains=gitcommitDiff
+  let s:comment = '. -\{24,\} >8 -\{24,\}$'
+  exe 'syn region gitcommitComment start="^' . s:comment . '" end="\%$" contains=gitcommitDiff'
 else
-  syn match gitcommitFirstLine	"\%^[^#].*" nextgroup=gitcommitBlank skipnl
+  let s:comment = '#'
   syn match gitcommitComment	"^#.*"
 endif
+
+exe 'syn match   gitcommitTrailers "\n\@<=\n\%([[:alnum:]-]\+\s*:.*\|(cherry picked from commit .*\)\%(\n\s.*\|\n[[:alnum:]-]\+\s*:.*\|\n(cherry picked from commit .*\)*\%(\n\n*\%(' . s:comment . '\)\|\n*\%$\)\@="'
+syn match   gitcommitTrailerToken "^[[:alnum:]-]\+\s*:" contained containedin=gitcommitTrailers
 
 syn match   gitcommitHash	"\<\x\{40,}\>" contains=@NoSpell display
 syn match   gitcommitOnBranch	"\%(^. \)\@<=On branch" contained containedin=gitcommitComment nextgroup=gitcommitBranch skipwhite
