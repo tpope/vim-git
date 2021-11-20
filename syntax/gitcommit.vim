@@ -62,10 +62,6 @@ syn match   gitcommitDiscardedArrow	" -> " contained nextgroup=gitcommitDiscarde
 syn match   gitcommitSelectedArrow	" -> " contained nextgroup=gitcommitSelectedFile
 syn match   gitcommitUnmergedArrow	" -> " contained nextgroup=gitcommitSelectedFile
 
-syn match   gitcommitWarning		"\%^[^#].*: needs merge$" nextgroup=gitcommitWarning skipnl
-syn match   gitcommitWarning		"^[^#].*: needs merge$" nextgroup=gitcommitWarning skipnl contained
-syn match   gitcommitWarning		"^\%(no changes added to commit\|nothing \%(added \)\=to commit\)\>.*\%$"
-
 hi def link gitcommitSummary		Keyword
 hi def link gitcommitTrailerToken	Label
 hi def link gitcommitComment		Comment
