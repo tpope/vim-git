@@ -50,10 +50,10 @@ syn match   gitcommitFile		".\{-\}\%($\| -> \)\@=" contained nextgroup=gitcommit
 syn match   gitcommitArrow		" -> " contained nextgroup=gitcommitFile
 syn match   gitcommitUntrackedFile	"\%(^.\t\)\@<=[^:：/]*\%(/.*\)\=$" contained containedin=gitcommitComment
 
-syn region  gitcommitUntracked	start=/^# Untracked files:$/ end=/^#$\|^#\@!/ contains=gitcommitHeader contained containedin=gitcommitComment fold
-syn region  gitcommitDiscarded	start=/^# Change\%(s not staged for commit\|d but not updated\):$/ end=/^#$\|^#\@!/ contains=gitcommitHeader,gitcommitDiscardedType fold
-syn region  gitcommitSelected	start=/^# Changes to be committed:$/ end=/^#$\|^#\@!/ contains=gitcommitHeader,gitcommitSelectedType fold
-syn region  gitcommitUnmerged	start=/^# Unmerged paths:$/ end=/^#$\|^#\@!/ contains=gitcommitHeader,gitcommitUnmergedType fold
+syn region  gitcommitUntracked	start=/^\z(.\) Untracked files:$/ end=/^\z1\=$\|^\z1\@!/ contains=gitcommitHeader containedin=gitcommitComment containedin=gitcommitComment contained transparent fold
+syn region  gitcommitDiscarded	start=/^\z(.\) Change\%(s not staged for commit\|d but not updated\):$/ end=/^\z1\=$\|^\z1\@!/ contains=gitcommitHeader,gitcommitDiscardedType containedin=gitcommitComment containedin=gitcommitComment contained transparent fold
+syn region  gitcommitSelected	start=/^\z(.\) Changes to be committed:$/ end=/^\z1$\|^\z1\@!/ contains=gitcommitHeader,gitcommitSelectedType containedin=gitcommitComment containedin=gitcommitComment contained transparent fold
+syn region  gitcommitUnmerged	start=/^\z(.\) Unmerged paths:$/ end=/^\z1\=$\|^\z1\@!/ contains=gitcommitHeader,gitcommitUnmergedType containedin=gitcommitComment containedin=gitcommitComment contained transparent fold
 
 syn match   gitcommitUntrackedFile	"\%(^.\t\)\@<=.*" contained containedin=gitcommitUntracked
 
@@ -70,10 +70,6 @@ syn match   gitcommitUnmergedArrow	" -> " contained nextgroup=gitcommitUnmergedF
 hi def link gitcommitSummary		Keyword
 hi def link gitcommitTrailerToken	Label
 hi def link gitcommitComment		Comment
-hi def link gitcommitUntracked		gitcommitComment
-hi def link gitcommitDiscarded		gitcommitComment
-hi def link gitcommitSelected		gitcommitComment
-hi def link gitcommitUnmerged		gitcommitComment
 hi def link gitcommitHash		Identifier
 hi def link gitcommitOnBranch		Comment
 hi def link gitcommitBranch		Special
