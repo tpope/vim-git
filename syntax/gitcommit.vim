@@ -8,6 +8,8 @@ if exists("b:current_syntax")
   finish
 endif
 
+scriptencoding utf-8
+
 syn case match
 syn sync minlines=50
 syn sync linebreaks=1
@@ -39,26 +41,31 @@ syn match   gitcommitOnBranch	"\%(^. \)\@<=On branch" contained containedin=gitc
 syn match   gitcommitOnBranch	"\%(^. \)\@<=Your branch .\{-\} '" contained containedin=gitcommitComment nextgroup=gitcommitBranch skipwhite
 syn match   gitcommitBranch	"[^ ']\+" contained
 syn match   gitcommitNoBranch	"\%(^. \)\@<=Not currently on any branch." contained containedin=gitcommitComment
-syn match   gitcommitHeader	"\%(^. \)\@<=\S.*:$"	contained containedin=gitcommitComment
+syn match   gitcommitHeader	"\%(^. \)\@<=\S.*[:：]$" contained containedin=gitcommitComment
 syn region  gitcommitAuthor	matchgroup=gitCommitHeader start=/\%(^. \)\@<=\%(Author\|Committer\|Date\):/ end=/$/ keepend oneline contained containedin=gitcommitComment transparent
 syn match   gitcommitNoChanges	"\%(^. \)\@<=No changes$" contained containedin=gitcommitComment
 
-syn region  gitcommitUntracked	start=/^# Untracked files:/ end=/^#$\|^#\@!/ contains=gitcommitHeader,gitcommitUntrackedFile fold
-syn match   gitcommitUntrackedFile  "\t\@<=.*"	contained
+syn match   gitcommitType		"\%(^.\t\)\@<=[^[:punct:][:space:]][^/:：]*[^[:punct:][:space:]][:：]\ze "he=e-1 contained containedin=gitcommitComment nextgroup=gitcommitFile skipwhite
+syn match   gitcommitFile		".\{-\}\%($\| -> \)\@=" contained nextgroup=gitcommitArrow
+syn match   gitcommitArrow		" -> " contained nextgroup=gitcommitFile
+syn match   gitcommitUntrackedFile	"\%(^.\t\)\@<=[^:：/]*\%(/.*\)\=$" contained containedin=gitcommitComment
 
-syn region  gitcommitDiscarded	start=/^# Change\%(s not staged for commit\|d but not updated\):/ end=/^#$\|^#\@!/ contains=gitcommitHeader,gitcommitDiscardedType fold
-syn region  gitcommitSelected	start=/^# Changes to be committed:/ end=/^#$\|^#\@!/ contains=gitcommitHeader,gitcommitSelectedType fold
-syn region  gitcommitUnmerged	start=/^# Unmerged paths:/ end=/^#$\|^#\@!/ contains=gitcommitHeader,gitcommitUnmergedType fold
+syn region  gitcommitUntracked	start=/^# Untracked files:$/ end=/^#$\|^#\@!/ contains=gitcommitHeader contained containedin=gitcommitComment fold
+syn region  gitcommitDiscarded	start=/^# Change\%(s not staged for commit\|d but not updated\):$/ end=/^#$\|^#\@!/ contains=gitcommitHeader,gitcommitDiscardedType fold
+syn region  gitcommitSelected	start=/^# Changes to be committed:$/ end=/^#$\|^#\@!/ contains=gitcommitHeader,gitcommitSelectedType fold
+syn region  gitcommitUnmerged	start=/^# Unmerged paths:$/ end=/^#$\|^#\@!/ contains=gitcommitHeader,gitcommitUnmergedType fold
 
-syn match   gitcommitDiscardedType	"\t\@<=[[:lower:]][^:]*[[:lower:]]: "he=e-2	contained containedin=gitcommitComment nextgroup=gitcommitDiscardedFile skipwhite
-syn match   gitcommitSelectedType	"\t\@<=[[:lower:]][^:]*[[:lower:]]: "he=e-2	contained containedin=gitcommitComment nextgroup=gitcommitSelectedFile skipwhite
-syn match   gitcommitUnmergedType	"\t\@<=[[:lower:]][^:]*[[:lower:]]: "he=e-2	contained containedin=gitcommitComment nextgroup=gitcommitUnmergedFile skipwhite
-syn match   gitcommitDiscardedFile	".\{-\}\%($\| -> \)\@=" contained nextgroup=gitcommitDiscardedArrow
-syn match   gitcommitSelectedFile	".\{-\}\%($\| -> \)\@=" contained nextgroup=gitcommitSelectedArrow
-syn match   gitcommitUnmergedFile	".\{-\}\%($\| -> \)\@=" contained nextgroup=gitcommitSelectedArrow
+syn match   gitcommitUntrackedFile	"\%(^.\t\)\@<=.*" contained containedin=gitcommitUntracked
+
+syn match   gitcommitDiscardedType	"\%(^.\t\)\@<=[^[:punct:][:space:]][^/:：]*[^[:punct:][:space:]][:：]\ze "he=e-1 contained nextgroup=gitcommitDiscardedFile skipwhite
+syn match   gitcommitSelectedType	"\%(^.\t\)\@<=[^[:punct:][:space:]][^/:：]*[^[:punct:][:space:]][:：]\ze "he=e-1 contained nextgroup=gitcommitSelectedFile skipwhite
+syn match   gitcommitUnmergedType	"\%(^.\t\)\@<=[^[:punct:][:space:]][^/:：]*[^[:punct:][:space:]][:：]\ze "he=e-1 contained nextgroup=gitcommitUnmergedFile skipwhite
+syn match   gitcommitDiscardedFile	"\S.\{-\}\%($\| -> \)\@=" contained nextgroup=gitcommitDiscardedArrow
+syn match   gitcommitSelectedFile	"\S.\{-\}\%($\| -> \)\@=" contained nextgroup=gitcommitSelectedArrow
+syn match   gitcommitUnmergedFile	"\S.\{-\}\%($\| -> \)\@=" contained nextgroup=gitcommitUnmergedArrow
 syn match   gitcommitDiscardedArrow	" -> " contained nextgroup=gitcommitDiscardedFile
 syn match   gitcommitSelectedArrow	" -> " contained nextgroup=gitcommitSelectedFile
-syn match   gitcommitUnmergedArrow	" -> " contained nextgroup=gitcommitSelectedFile
+syn match   gitcommitUnmergedArrow	" -> " contained nextgroup=gitcommitUnmergedFile
 
 hi def link gitcommitSummary		Keyword
 hi def link gitcommitTrailerToken	Label
