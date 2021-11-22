@@ -10,7 +10,9 @@ endif
 
 let b:did_ftplugin = 1
 
-setlocal comments=:# commentstring=#\ %s formatoptions-=t
+let &l:comments = ':' . (matchstr(getline('$'), '^[#;@!$%^&|:]\S\@!') . '#')[0]
+let &l:commentstring = &l:comments[1] . ' %s'
+setlocal formatoptions-=t
 setlocal nomodeline
 let b:undo_ftplugin = "setl com< cms< fo< ml<"
 
