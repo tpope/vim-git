@@ -33,13 +33,12 @@ if s:l == 0
 elseif getline(s:l)[0] !=# getline(s:l - 1)[0]
   let s:scissors = 1
 endif
-let s:comment = escape(matchstr(getline(s:l), '^[#;@!$%^&|:]\S\@!'), '^$.*[]~\"/')
+let s:comment = escape((matchstr(getline(s:l), '^[#;@!$%^&|:]\S\@!') . '#')[0], '^$.*[]~\"/')
 
 if s:scissors
-  let s:comment = (empty(s:comment) ? '[#;@!$%^&|:]' : s:comment) . ' -\{24,\} >8 -\{24,\}$'
+  let s:comment .= ' -\{24,\} >8 -\{24,\}$'
   exe 'syn region gitcommitComment start="^' . s:comment . '" end="\%$" contains=gitcommitDiff'
 else
-  let s:comment = (empty(s:comment) ? '#' : s:comment)
   exe 'syn match gitcommitComment "^' . s:comment . '.*"'
 endif
 exe 'syn match   gitcommitTrailers "\n\@<=\n\%([[:alnum:]-]\+\s*:.*\|(cherry picked from commit .*\)\%(\n\s.*\|\n[[:alnum:]-]\+\s*:.*\|\n(cherry picked from commit .*\)*\%(\n\n*\%(' . s:comment . '\)\|\n*\%$\)\@="'
