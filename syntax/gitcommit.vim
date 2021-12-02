@@ -27,7 +27,7 @@ syn match   gitcommitBlank	"^.\+" contained contains=@Spell
 syn match   gitcommitFirstLine	"\%^.*" nextgroup=gitcommitBlank,gitcommitComment skipnl
 
 let s:scissors = 0
-let s:l = search('^[#;@!$%^&|:] -\{24,\} >8 -\{24,\}$', 'n', '', 100)
+let s:l = search('^[#;@!$%^&|:] -\{24,\} >8 -\{24,\}$', 'cnW', '', 100)
 if s:l == 0
   let s:l = line('$')
 elseif getline(s:l)[0] !=# getline(s:l - 1)[0]

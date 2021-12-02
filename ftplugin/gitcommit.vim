@@ -18,7 +18,7 @@ setlocal includeexpr=substitute(v:fname,'^[bi]/','','')
 
 let b:undo_ftplugin = 'setl modeline< tabstop< formatoptions< tw< com< cms< formatlistpat< inc< inex<'
 
-let s:l = search('\C\m^[#;@!$%^&|:] -\{24,\} >8 -\{24,\}$', 'n', '', 100)
+let s:l = search('\C\m^[#;@!$%^&|:] -\{24,\} >8 -\{24,\}$', 'cnW', '', 100)
 let &l:comments = ':' . (matchstr(getline(s:l ? s:l : '$'), '^[#;@!$%^&|:]\S\@!') . '#')[0]
 let &l:commentstring = &l:comments[1] . ' %s'
 unlet s:l
