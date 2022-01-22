@@ -13,7 +13,7 @@ endfunction
 " Git
 au BufNewFile,BufRead COMMIT_EDITMSG,TAG_EDITMSG,MERGE_MSG	call s:Setf('gitcommit')
 au BufNewFile,BufRead NOTES_EDITMSG,EDIT_DESCRIPTION		call s:Setf('gitcommit')
-au BufNewFile,BufRead *.git/config,.gitconfig,/etc/gitconfig	call s:Setf('gitconfig')
+au BufNewFile,BufRead *.git/config,.gitconfig,*/etc/gitconfig	call s:Setf('gitconfig')
 au BufNewFile,BufRead */.config/git/config			call s:Setf('gitconfig')
 au BufNewFile,BufRead .gitmodules,*.git/modules/**/config	call s:Setf('gitconfig')
 if !empty($XDG_CONFIG_HOME)
