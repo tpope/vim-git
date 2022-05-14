@@ -12,7 +12,7 @@ let b:did_ftplugin = 1
 
 setlocal nomodeline tabstop=8 formatoptions+=tl textwidth=72
 setlocal formatoptions-=c formatoptions-=r formatoptions-=o formatoptions-=q formatoptions+=n
-setlocal formatlistpat+=\\\|^\\s*[-*+]\\s\\+
+setlocal formatlistpat=^\\s*\\d\\+[\\]:.)}]\\s\\+\\\|^\\s*[-*+]\\s\\+
 setlocal include=^+++
 setlocal includeexpr=substitute(v:fname,'^[bi]/','','')
 
