@@ -42,6 +42,11 @@ function! s:diffcomplete(A, L, P) abort
   return args
 endfunction
 
+function! s:setupdiff() abort
+  command! -bang -bar -buffer -complete=custom,s:diffcomplete -nargs=* DiffGitCached :call s:gitdiffcached(<bang>0, <f-args>)
+  setlocal buftype=nowrite nobuflisted noswapfile nomodifiable filetype=git
+endfunction
+
 function! s:gitdiffcached(bang, ...) abort
   let name = tempname()
   if a:0
@@ -50,8 +55,6 @@ function! s:gitdiffcached(bang, ...) abort
     let extra = "-p --stat=".&columns
   endif
   call system("git diff --cached --no-color --no-ext-diff ".extra." > ".shellescape(name))
-  exe "pedit " . fnameescape(name)
-  wincmd P
-  command! -bang -bar -buffer -complete=custom,s:diffcomplete -nargs=* DiffGitCached :call s:gitdiffcached(<bang>0, <f-args>)
-  setlocal buftype=nowrite nobuflisted noswapfile nomodifiable filetype=git
+  exe 'pedit +call\ s:setupdiff()' fnameescape(name)
+  silent! wincmd P
 endfunction
