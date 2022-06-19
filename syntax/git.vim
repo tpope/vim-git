@@ -38,7 +38,7 @@ syn match  gitReflog /^\x\{40,\} \x\{40,\} .\{-\}\d\+\s-\d\{4\}\t.*/ skipwhite c
 syn region gitDiff start=/^\%(diff --git \)\@=/ end=/^\%(diff --\|$\)\@=/ contains=@gitDiff fold
 syn region gitDiff start=/^\%(@@ -\)\@=/ end=/^\%(diff --\%(git\|cc\|combined\) \|$\)\@=/ contains=@gitDiff
 
-syn region gitDiffMerge start=/^\%(diff --\%(cc\|combined\) \)\@=/ end=/^\%(diff --\|$\)\@=/ contains=@gitDiff
+syn region gitDiffMerge start=/^\%(diff --\%(cc\|combined\) \)\@=/ end=/^\%(diff --\|$\)\@=/ contains=@gitDiff fold
 syn region gitDiffMerge start=/^\%(@@@@* -\)\@=/ end=/^\%(diff --\|$\)\@=/ contains=@gitDiff
 syn match gitDiffAdded "^ \++.*" contained containedin=gitDiffMerge
 syn match gitDiffAdded "{+[^}]*+}" contained containedin=gitDiff
