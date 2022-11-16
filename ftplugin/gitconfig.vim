@@ -9,6 +9,11 @@ if (exists("b:did_ftplugin"))
 endif
 let b:did_ftplugin = 1
 
+setlocal formatoptions-=t formatoptions+=croql
+setlocal comments=:#,:; commentstring=;\ %s
+
+let b:undo_ftplugin = "setl fo< com< cms<"
+
 if !has('gui_running')
   command! -buffer -nargs=1 Sman
         \ silent exe '!' . 'LESS= MANPAGER="less --pattern=''^\s{,8}' . KeywordLookup_gitconfig() . <q-args> . '\b'' --hilite-search" man ' . 'git-config' |
@@ -30,7 +35,5 @@ endif
 setlocal iskeyword+=-
 setlocal keywordprg=:Sman
 
-setlocal formatoptions-=t formatoptions+=croql
-setlocal comments=:#,:; commentstring=;\ %s
+let b:undo_ftplugin .= '| setlocal keywordprg< iskeyword<'
 
-let b:undo_ftplugin = "setl fo< com< cms< keywordprg< iskeyword<"
