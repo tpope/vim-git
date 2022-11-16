@@ -14,6 +14,10 @@ setlocal comments=:#,:; commentstring=;\ %s
 
 let b:undo_ftplugin = "setl fo< com< cms<"
 
+if !executable('less')
+  finish
+endif
+
 if !has('gui_running')
   command! -buffer -nargs=1 Sman
         \ silent exe '!' . 'LESS= MANPAGER="less --pattern=''^\s{,8}' . KeywordLookup_gitconfig() . <q-args> . '\b'' --hilite-search" man ' . 'git-config' |
