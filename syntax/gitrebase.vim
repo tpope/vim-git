@@ -26,6 +26,7 @@ syn match   gitrebaseNoop   "\v^noop>"
 syn match   gitrebaseMerge  "\v^m(erge)=>"   nextgroup=gitrebaseMergeOption,gitrebaseName skipwhite
 syn match   gitrebaseLabel  "\v^l(abel)=>"   nextgroup=gitrebaseName skipwhite
 syn match   gitrebaseReset  "\v^(t|reset)=>" nextgroup=gitrebaseName skipwhite
+syn match   gitrebaseUpdateRef "\v^u%(pdate-ref)=>" nextgroup=gitrebaseRefPathHead skipwhite
 syn match   gitrebaseSummary ".*"               contains=gitrebaseHash contained
 syn match   gitrebaseCommand ".*"                                      contained
 exe 'syn match gitrebaseComment " \@<=' . s:c . ' empty$" containedin=gitrebaseSummary contained'
@@ -33,6 +34,7 @@ exe 'syn match gitrebaseComment "^\s*' . s:c . '.*" contains=gitrebaseHash'
 syn match   gitrebaseSquashError "\v%^%(s%(quash)=>|f%(ixup)=>)" nextgroup=gitrebaseCommit skipwhite
 syn match   gitrebaseMergeOption "\v-[Cc]>"  nextgroup=gitrebaseMergeCommit skipwhite contained
 syn match   gitrebaseMergeCommit "\v<\x{7,}>"  nextgroup=gitrebaseName skipwhite contained
+syn match   gitrebaseRefPathHead "\<refs/heads/" nextgroup=gitrebaseName skipwhite contained
 syn match   gitrebaseName        "\v[^[:space:].*?i:^~/-]\S+" nextgroup=gitrebaseMergeComment skipwhite contained
 exe 'syn match gitrebaseMergeComment "' . s:c . '"  nextgroup=gitrebaseSummary skipwhite contained'
 
@@ -52,11 +54,13 @@ hi def link gitrebaseNoop           Comment
 hi def link gitrebaseMerge          Exception
 hi def link gitrebaseLabel          Label
 hi def link gitrebaseReset          Keyword
+hi def link gitrebaseUpdateRef      Exception
 hi def link gitrebaseSummary        String
 hi def link gitrebaseComment        Comment
 hi def link gitrebaseSquashError    Error
 hi def link gitrebaseMergeCommit    gitrebaseCommit
 hi def link gitrebaseMergeComment   gitrebaseComment
+hi def link gitrebaseRefPathHead    gitrebaseComment
 hi def link gitrebaseName           Tag
 
 let b:current_syntax = "gitrebase"
