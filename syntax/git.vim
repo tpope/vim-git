@@ -69,6 +69,7 @@ syn match  gitReflogMiddle /\S\+@{\d\+} (/he=e-2 nextgroup=gitIdentity contains=
 
 syn match  gitIdentity /\S.\{-\} <[^>]*>/ contained nextgroup=gitDate skipwhite contains=@NoSpell
 syn region gitEmail matchgroup=gitEmailDelimiter start=/</ end=/>/ keepend oneline contained containedin=gitIdentity contains=@NoSpell
+syn match  gitDate      /\<\d\d\d\d-\d\d-\d\d \d\d:\d\d:\d\d [+-]\d\d\d\d\>/ contained contains=@NoSpell
 syn match  gitDate      /\<\u\l\l \u\l\l \d\=\d \d\d:\d\d:\d\d \d\d\d\d [+-]\d\d\d\d/ contained contains=@NoSpell
 syn match  gitDate      /-\=\d\+ [+-]\d\d\d\d\>/               contained contains=@NoSpell
 syn match  gitDate      /\<\d\+ \l\+ ago\>/                    contained contains=@NoSpell
