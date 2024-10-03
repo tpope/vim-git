@@ -17,7 +17,7 @@ setlocal nomodeline
 let b:undo_ftplugin = "setl com< cms< fo< ml<"
 
 function! s:choose(word) abort
-  s/^\(\w\+\>\)\=\(\s*\)\ze\x\{4,40\}\>/\=(strlen(submatch(1)) == 1 ? a:word[0] : a:word) . substitute(submatch(2),'^$',' ','')/e
+  s/^\(\w\+\>\)\=\(\s*\)\ze\x\{4,\}\>/\=(strlen(submatch(1)) == 1 ? a:word[0] : a:word) . substitute(submatch(2),'^$',' ','')/e
 endfunction
 
 function! s:cycle(count) abort
